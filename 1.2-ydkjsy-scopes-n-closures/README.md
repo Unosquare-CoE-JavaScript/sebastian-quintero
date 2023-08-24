@@ -69,3 +69,5 @@ POLP: Principle Of Least Privilege
 Curly braces `{ ... }` need a scope declaration like `let`, `const`, `function` inside to be defined as an scope.
 
 ## Chapter 7: Use Closures
+
+Closure is the ability of functions to access outer scope. Closure is a live link to variables allowing a function to modify those variables and keep tracking of their updates.
