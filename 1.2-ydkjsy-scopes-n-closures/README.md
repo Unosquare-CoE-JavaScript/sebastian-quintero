@@ -141,3 +141,36 @@ ESM: As CommonJS, these are file-based modules but are strict (`"use strict";`) 
 * Use `export` keyword for exposing something to the public API.
 * Use `import` keyword for include an external module.
 
+AMD: Asynchronous Module Definition (RequireJS)
+```js
+define([ "./Student" ], function StudentList(Student) {
+    var elems = [];
+
+    return {
+        renderList() {
+            // ...
+        }
+    }
+});
+```
+
+UMD: Universal Module Definition. It's less specific. Extract format and more a collection of similar formats. It was designed to create a better interop for modules that may be loaded in browsers, by AMD-style loaders, or in Node.
+```js
+(function UMD(name, context, definition) {
+    if (typeof define === 'function' && define.amd) {
+        define(definition);
+    } else if (typeof module !== 'undefined' && module.exports) {
+        module.exports = definition(name, context);
+    } else {
+        context[name] = definition(name, context);
+    }
+})('StudentList', this, function DEF(name, context) {
+    var elems = [];
+
+    return {
+        renderList() {
+            // ...
+        }
+    }
+});
+```
