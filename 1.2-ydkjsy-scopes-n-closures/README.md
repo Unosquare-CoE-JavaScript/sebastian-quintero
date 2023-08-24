@@ -65,3 +65,7 @@ TDZ applies for `let` and `const` variables only.
 POLE: Principle Of Least Exposure
 
 POLP: Principle Of Least Privilege
+
+Curly braces `{ ... }` need a scope declaration like `let`, `const`, `function` inside to be defined as an scope.
+
+## Chapter 7: Use Closures
