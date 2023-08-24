@@ -71,3 +71,73 @@ Curly braces `{ ... }` need a scope declaration like `let`, `const`, `function` 
 ## Chapter 7: Use Closures
 
 Closure is the ability of functions to access outer scope. Closure is a live link to variables allowing a function to modify those variables and keep tracking of their updates.
+
+## Chapter 8: The Module Pattern
+
+Namespaces: A stateless group of functions.
+```js
+// namespace
+var Utils = {
+    wait(ms) {
+        return new Promise(function (resolve) {
+            setTimeout(resolve, ms);
+        });
+    }
+}
+```
+
+Data Structures: A stateful grouping.
+```js
+// data structure
+var Student = {
+    // public access
+    reconds: [
+        { id: 14, name: "Kyle" },
+    ],
+    getName(studentId) {
+        const student = this.records.find(
+            student => student.id === studentId
+        );
+        return student.name;
+    }
+}
+```
+
+Modules: A stateful access control
+```js
+var Student = (function defineStudent() {
+    // private access
+    var records = [
+        { id: 14, name: "Kyle" },
+    ];
+
+    function getName(studentId) {
+        const student = this.records.find(
+            student => student.id === studentId
+        );
+        return student.name;
+    }
+
+    return {
+        getName,
+    };
+})();
+```
+
+CommonJS: export all or nothing via `module.exports`
+
+* File base modules.
+* Module instance are singletons.
+* Everything is private by default.
+* Use `module.exports` object to expose a public API.
+* `Object.assign(module.exports, { /* ...public API */ })` is encouraged to prevent circular dependencies and overwrite issues.
+* Use `require(/* path */)` for include an external module.
+
+ESM: As CommonJS, these are file-based modules but are strict (`"use strict";`) by default.
+
+* File base modules.
+* Module instance are singletons.
+* Everything is private by default.
+* Use `export` keyword for exposing something to the public API.
+* Use `import` keyword for include an external module.
+
