@@ -147,6 +147,30 @@ figcaption a {
   display: block;
 }
 
+.footer {
+  background-color: var(--color5);
+}
+
+footer {
+  background-color: var(--color5);
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+footer ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+  gap: 1rem;
+}
+
+footer address {
+  font-weight: bold;
+  font-style: normal;
+}
+
 /* turn on flexbox here - prior to this, elements stacked individually as blocks */
 
 @media (min-width: 550px) {
@@ -178,6 +202,18 @@ figcaption a {
     );
     max-height: 211px;
   }
+  footer {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 4%;
+  }
+  footer .social {
+    flex-basis: 48%;
+  }
+  footer address {
+    flex-basis: 48%;
+  }
 }
 
 @media (min-width: 800px) {
@@ -186,5 +222,14 @@ figcaption a {
   }
   section li {
     flex-basis: 32.5%;
+  }
+  footer {
+    justify-content: space-around;
+  }
+  footer .social {
+    flex-basis: 32%;
+  }
+  footer address {
+    flex-basis: 64%;
   }
 }
