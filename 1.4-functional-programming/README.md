@@ -88,3 +88,34 @@ const fromNullable = x => x != null ? Right(x) : Left()
 const findColor = name => 
     fromNullable({ red: '#ff4444', blue: '#3b5998', yellow: '#fff68f' }[name]);
 ```
+
+## Task
+
+It is a lazy computation.
+```js
+/** Tasks definitions */
+/** 
+ * A task is like a promise but reject first because
+ * it enforces always handling runtime errors so
+ * the safety of the execution is guarantee.
+ */
+
+const readFile = (path, enc) =>
+    Task((rej, res) =>
+        fs.readFile(path, enc, (err, contents) =>
+            err ? rej(err) : res(contents)));
+
+const writeFile = (path, contents) =>
+    Task((rej, res) =>
+        fs.writeFile(path, contents, (err, contents) =>
+            err ? rej(err) : res(contents)))
+
+// Application definition
+const app = () =>
+    readFile('config.json', 'utf-8')
+    .map(contents => contents.replace(/3/g, '6'))
+    .chain(newContents => writeFile('config1.json', newContents))
+
+// Actual execution
+app.fork(console.error, () => console.log('success!'));
+```
