@@ -11,12 +11,12 @@ body {
   &.btn-primary {
     border: 1px solid $venus;
     background-color: $hopbush;
-    color: #fff;
+    color: $white;
   }
   &.btn-secondary {
     border: 1px solid $patina;
     background-color: $nebula;
-    color: #000;
+    color: $black;
   }
   &:disabled {
     opacity: 0.5;

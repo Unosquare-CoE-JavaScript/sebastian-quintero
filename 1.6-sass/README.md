@@ -63,3 +63,40 @@ $error_color: #f00 !default; /* global variable */
     text-shadow: 0 0 2px darken($text_color, 40%);
 }
 ```
+
+## Mixins
+
+The primary way of reusing styles in SASS. Declaration block is merged, by way of `@include`.
+
+```scss
+@mixin alert-text {
+    background-color: #f00;
+    color: white;
+    font-variant: small-caps;
+}
+
+.error-text {
+    @include alert-text;
+}
+
+.has-error:after {
+    @include alert-text;
+    display: inline-block;
+}
+```
+
+Mixins support arguments too.
+
+```scss
+@mixin alert-text($color) {
+    background-color: $color;
+}
+
+.error-text {
+    @include alert-text(blue);
+}
+
+.has-error:after {
+    @include alert-text(red);
+}
+```
