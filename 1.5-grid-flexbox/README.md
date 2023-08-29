@@ -17,3 +17,50 @@ Use `flex-basis` instead of width to make a children change its width based on t
 ## Flexbox Grid System
 
 Define how many boxes you allow and the space between them. Create helper clases when you need certain item to fill a space. Always use the `flex-basis` property to define exactly the percentage for your column span.
+
+## Responsive Images
+
+`<picture>`: Displays what you want a certain size.
+
+```html
+<picture>
+    <source
+        src="..."
+        media="(min-width: 850px)"
+    >
+    <img
+        src="..."
+        alt="..."
+    >
+</picture>
+```
+
+There are media queries for responsive images. `(orientation: landscape)` means the width is larger than height. `(orientation: portrait)` means the height is larger than width.
+
+`srcset` and `sizes`: The browser decides which image displays.
+```html
+<img src="small.jpg"
+    srcset="large.jpg 1024w,
+        medium.jpg 640w,
+        small.jpg 320w"
+    sizes="(min-width: 36em) 33.3vw, 100vw"
+    alt="..." />
+```
+
+`(min-width: 36em) 33.3vw, 100vw`: Size of the hole on the web page. If the `min-width` is at least `36em`, display the image at `33.3vw`. Otherwise, display the image at `100vw`.
+
+| picture                                                                 | src,srcset                                                              |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Image optimized for content reasons matters more than technical reasons | Image optimized for technical reasons matters more than content reasons |
+| Author chooses the best image                                           | Browser chooses the best image                                          |
+| Images may be very different in composition and dimension               | Images vary in dimension but not composition                            |
+
+Useful link for creating responsive images: https://responsivebreakpoints.com/
+
+Tip: To make the images responsive and prevent a jump between different dimensions use `max-width` and `max-height` to define the `<img>` behaivor. e. g.
+```css
+img {
+    max-width: 100%; /* Fill the parent element */
+    max-height: 454px; /* Browser will keep the aspect ratio when "height = 454px" is reached */
+}
+```
