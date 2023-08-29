@@ -3,6 +3,8 @@
 @import "./mixins/mixins";
 
 .btn {
+  /* reduce css size instead of copying color for all the variants */
+  color: $white;
   display: inline-block;
   border: 1px solid transparent;
   white-space: nowrap;

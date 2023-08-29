@@ -66,13 +66,17 @@ $error_color: #f00 !default; /* global variable */
 
 ## Mixins
 
-The primary way of reusing styles in SASS. Declaration block is merged, by way of `@include`.
+The primary way of reusing styles in SASS. Declaration block is merged, by way of `@include`. Mixins support arguments too.
 
 ```scss
 @mixin alert-text {
     background-color: #f00;
     color: white;
     font-variant: small-caps;
+}
+
+@mixin alert-with-args($color) {
+    background-color: $color;
 }
 
 .error-text {
@@ -83,14 +87,6 @@ The primary way of reusing styles in SASS. Declaration block is merged, by way o
     @include alert-text;
     display: inline-block;
 }
-```
-
-Mixins support arguments too.
-
-```scss
-@mixin alert-text($color) {
-    background-color: $color;
-}
 
 .error-text {
     @include alert-text(blue);
@@ -98,5 +94,49 @@ Mixins support arguments too.
 
 .has-error:after {
     @include alert-text(red);
+}
+```
+
+Mixins support default argument values so the declaration would include a value. A `null` default value will omit the entire property.
+
+```scss
+@mixin alert-text($color: #f33, $opacity: null) {
+    background-color: $color;
+    opacity: $opacity;
+}
+
+h1 {
+    /* will apply 0.8 as opacity */
+    @include alert-text(blue, 0.8);
+}
+
+h2 {
+    /* arguments by name, this call ignores the order */
+    /* will ignore the opacity */
+    @include alert-text($color: green);
+}
+
+h3 {
+    /* default value will be applied for $color */
+    /* will ignore the opacity */
+    @include alert-text;
+}
+```
+
+Mixins support passing a declaration blocks. You can define what mixin will include within by using the `@content` keyword.
+
+```scss
+@mixin foo($color) {
+    color: $color;
+    .inner {
+        @content;
+    }
+}
+
+.btn {
+    /* it will generate a .inner class with color: red */
+    @include foo(#c69) {
+        color: red;
+    }
 }
 ```

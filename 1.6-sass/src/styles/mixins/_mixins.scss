@@ -1,4 +1,41 @@
 @mixin btn-color($color) {
   background-color: $color;
-  color: $white;
+}
+
+@mixin range-track() {
+  &::-webkit-slider-runnable-track {
+    @content;
+  }
+
+  &::-moz-range-track {
+    @content;
+  }
+
+  &::-ms-track {
+    @content;
+
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+  }
+}
+
+@mixin range-thumb() {
+  &::-webkit-slider-thumb {
+    @content;
+    -webkit-appearance: none;
+    margin-top: -14px;
+  }
+
+  &::-moz-range-thumb {
+    @content;
+  }
+
+  &::-ms-thumb {
+    @content;
+  }
 }
