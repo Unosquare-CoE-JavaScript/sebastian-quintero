@@ -42,3 +42,24 @@ SASS uses the `&` symbol as parent selector.
     }
 }
 ```
+
+## Importing
+
+Importing in CSS makes a new HTTP request. Importing in SASS does a different stuff.
+
+Partials: Files starting with undersocre. These files are no compiled into CSS files but included into the ones whic are compiled.
+
+## Variables
+
+Variables are declare using `$` as the first character of the variable and `:` to define its value. `!default` means "unless set elsewhere".
+
+```scss
+$error_color: #f00 !default; /* global variable */
+
+.alert-error {
+    $text-color: #ddd; /* local variable */
+    background-color: $error-color;
+    color: $text_color;
+    text-shadow: 0 0 2px darken($text_color, 40%);
+}
+```
