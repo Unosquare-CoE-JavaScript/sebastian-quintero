@@ -64,3 +64,48 @@ img {
     max-height: 454px; /* Browser will keep the aspect ratio when "height = 454px" is reached */
 }
 ```
+
+## CSS Grid
+
+It's a 2D layout system allowing you to place items based on rows and columns.
+
+A good practice for placing and defining rows and columns for a grid container is to count spaces and use `grid-row` and `grid-column` on the children accordingly. e. g.
+
+```css
+/* |_|___|
+ * |_|_|_|
+ */
+
+.container {
+    display: grid;
+}
+
+.at-1-1 {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+}
+
+.at-1-2 {
+    grid-row: 1 / 2;
+    grid-column: 2 / 4;
+}
+
+.at-2-1 {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+}
+
+.at-2-2 {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+.at-2-3 {
+    grid-row: 2 / 3;
+    grid-column: 3 / 4;
+}
+```
+
+`grid-template-columns` and `grid-template-rows` are container properties to define the dimensions of the elements within the container.
+
+The `span` value allows to fill many rows or columns for `grid-row` and `grid-column`.
