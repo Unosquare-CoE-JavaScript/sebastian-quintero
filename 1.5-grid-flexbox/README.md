@@ -109,3 +109,20 @@ A good practice for placing and defining rows and columns for a grid container i
 `grid-template-columns` and `grid-template-rows` are container properties to define the dimensions of the elements within the container.
 
 The `span` value allows to fill many rows or columns for `grid-row` and `grid-column`.
+
+Use `grid-template-areas` to define name rows and columns using strings with the class names into a grid-like notation.
+```css. e. g.
+.container {
+    grid-template-areas:
+        "featured featured featured featured"
+        "... ... main main";
+}
+
+.featured {
+    grid-area: "featured";
+}
+
+.main {
+    grid-area: "main";
+}
+```
