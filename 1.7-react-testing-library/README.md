@@ -20,7 +20,7 @@ Steps:
 
 ## Types of Tests
 
-__Unit tests__: tests one unit of code in isolation.
+### Unit tests: tests one unit of code in isolation.
 
 * Mock dependencies
 * Test internals
@@ -28,9 +28,15 @@ __Unit tests__: tests one unit of code in isolation.
 - 👎 Further from how users interact with software
 - 👎 More likely to break with refactoring
 
-__Integration tests__: tests how multiple units work together.
+__When to Unit Test?__ For complicated functions with many edge cases. unit tests help with determining what cause functional tests to fail.
 
-__Functional tests__: tests a particular function/behavior of software. You are not testing code, you are testing behavior.
+### Integration tests
+
+Tests how multiple units work together.
+
+### Functional tests
+
+Tests a particular function/behavior of software. You are not testing code, you are testing behavior.
 
 * Include all relevant units
 * Test behavior
@@ -38,7 +44,9 @@ __Functional tests__: tests a particular function/behavior of software. You are 
 + 👍 Robust tests
 - 👎 More difficult to debug failing tests
 
-__Acceptance / End-to-end (E2E) Tests__: use actual browser and server.
+### Acceptance / End-to-end (E2E) Tests
+
+Use actual browser and server.
 
 ## React Testing Library
 
@@ -55,3 +63,10 @@ https://www.w3.org/TR/wai-aria/#role_definitions
 ### Log Available Roles
 
 To log available roles for the current rendered component `logRoles` function is used.
+
+```jsx
+import { logRoles, render } from "@testing-library/react";
+
+const { container } = render(<Button />);
+logRoles(container);
+```
