@@ -1,4 +1,4 @@
-import { logRoles, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SummaryForm } from "./SummaryForm";
 
@@ -53,10 +53,7 @@ describe("popover", () => {
   it("should be shown on mouse over", async () => {
     const user = await userEvent.setup();
 
-    const { container } = render(<SummaryForm />);
-
-    logRoles(container);
-    screen.debug();
+    render(<SummaryForm />);
 
     const termsAndConditions = screen.getByText(/terms and conditions/i);
 
@@ -64,8 +61,6 @@ describe("popover", () => {
     const popover = screen.queryByText(
       /no ice cream will actually be delivered/i
     );
-
-    screen.debug();
 
     expect(popover).toBeInTheDocument();
   });

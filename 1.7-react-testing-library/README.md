@@ -70,3 +70,7 @@ import { logRoles, render } from "@testing-library/react";
 const { container } = render(<Button />);
 logRoles(container);
 ```
+
+### Asynchronous
+
+Use `findBy` methods to access elements that could have an asyncrhonous behavior.
