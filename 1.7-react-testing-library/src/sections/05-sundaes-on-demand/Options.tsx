@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import { ScoopOption } from "./ScoopOption";
 import { Item } from "./item.model";
 import { Row } from "react-bootstrap";
+import { ToppingOption } from "./ToppingOption";
 
 const ITEM_COMPONENT_MAP: Record<string, React.FC<Item>> = {
   scoops: ScoopOption,
-  //   topings: null,
+  toppings: ToppingOption,
 };
 
 export type OptionsProps = {
-  type: "scoops" | "topings";
+  type: "scoops" | "toppings";
 };
 
 export const Options: React.FC<OptionsProps> = ({ type }) => {
