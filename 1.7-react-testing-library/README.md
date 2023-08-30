@@ -18,18 +18,6 @@ Steps:
 * Involves collaboration between lots of roles: developers, QA, bussiness partners, etc.
 * Defines process for different group to interact.
 
-## React Testing Library
-
-This library creates a virtual DOM and a set of functions to interact with.
-
-### Which query should I use?
-
-https://testing-library.com/docs/queries/about#priority
-
-### Definition of Roles
-
-https://www.w3.org/TR/wai-aria/#role_definitions
-
 ## Types of Tests
 
 __Unit tests__: tests one unit of code in isolation.
@@ -51,3 +39,19 @@ __Functional tests__: tests a particular function/behavior of software. You are 
 - 👎 More difficult to debug failing tests
 
 __Acceptance / End-to-end (E2E) Tests__: use actual browser and server.
+
+## React Testing Library
+
+This library creates a virtual DOM and a set of functions to interact with.
+
+### Which query should I use?
+
+https://testing-library.com/docs/queries/about#priority
+
+### Definition of Roles
+
+https://www.w3.org/TR/wai-aria/#role_definitions
+
+### Log Available Roles
+
+To log available roles for the current rendered component `logRoles` function is used.
