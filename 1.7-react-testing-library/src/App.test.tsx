@@ -3,6 +3,6 @@ import App from "./App";
 
 test("renders learn react link", () => {
   render(<App />);
-  const title = screen.getByText(/vite \+ react/i);
-  expect(title).toBeInTheDocument();
+  const button = screen.getByRole("button", { name: /count is \d+/i });
+  expect(button).toBeInTheDocument();
 });

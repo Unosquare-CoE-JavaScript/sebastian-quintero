@@ -1,27 +1,53 @@
-# React + TypeScript + Vite
+# Unit Testing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## TDD - Test-Driven Development
 
-Currently, two official plugins are available:
+Write the test before writing code, then write code to make the test pass.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+"red-green" testing: Tests fail before code is written.
 
-## Expanding the ESLint configuration
+Steps:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Create a test that fails.
+2. Create the actual code to make the test pass.
+3. Refactor the code.
+4. Start again from the step 1.
 
-- Configure the top-level `parserOptions` property like this:
+## BDD - Behavior-Driven Development
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+* Involves collaboration between lots of roles: developers, QA, bussiness partners, etc.
+* Defines process for different group to interact.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## React Testing Library
+
+This library creates a virtual DOM and a set of functions to interact with.
+
+### Which query should I use?
+
+https://testing-library.com/docs/queries/about#priority
+
+### Definition of Roles
+
+https://www.w3.org/TR/wai-aria/#role_definitions
+
+## Types of Tests
+
+__Unit tests__: tests one unit of code in isolation.
+
+* Mock dependencies
+* Test internals
++ 👍 Very easy to pinpoint failures
+- 👎 Further from how users interact with software
+- 👎 More likely to break with refactoring
+
+__Integration tests__: tests how multiple units work together.
+
+__Functional tests__: tests a particular function/behavior of software. You are not testing code, you are testing behavior.
+
+* Include all relevant units
+* Test behavior
++ 👍 Close to how users interact with software
++ 👍 Robust tests
+- 👎 More difficult to debug failing tests
+
+__Acceptance / End-to-end (E2E) Tests__: use actual browser and server.
