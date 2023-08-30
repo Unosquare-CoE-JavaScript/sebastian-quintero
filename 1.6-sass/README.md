@@ -286,3 +286,7 @@ __Modifier__: A flag on a block or element, used to change appearance and/or beh
 ```
 
 Alert: Use `@extends` cautiously because it can generate a lot of CSS garbage.
+
+## Functions
+
+`@function` & `@return` keywords are used. SASS functions are always pure.
