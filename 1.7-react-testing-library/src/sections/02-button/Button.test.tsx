@@ -6,7 +6,7 @@ test("button has correct initial color", () => {
   //   logRoles(container);
   const button = screen.getByRole("button", { name: "Change to blue" });
   expect(button).toHaveStyle({
-    "background-color": "red",
+    "background-color": "rgb(255, 0, 0)",
   });
 });
 
@@ -14,7 +14,7 @@ test("button turns blue when clicked", () => {
   render(<Button />);
   const button = screen.getByRole("button");
   fireEvent.click(button);
-  expect(button).toHaveStyle({ "background-color": "blue" });
+  expect(button).toHaveStyle({ "background-color": "rgb(0, 0, 255)" });
 });
 
 test("button turns red when clicked twice", () => {
@@ -22,7 +22,7 @@ test("button turns red when clicked twice", () => {
   const button = screen.getByRole("button");
   fireEvent.click(button);
   fireEvent.click(button);
-  expect(button).toHaveStyle({ "background-color": "red" });
+  expect(button).toHaveStyle({ "background-color": "rgb(255, 0, 0)" });
 });
 
 test("initial state", () => {
@@ -44,7 +44,7 @@ test("button is disabled and turning gray when checkbox is checked", () => {
   fireEvent.click(checkbox);
 
   expect(button).toBeDisabled();
-  expect(button).toHaveStyle({ "background-color": "gray" });
+  expect(button).toHaveStyle({ "background-color": "rgb(128, 128, 128)" });
 });
 
 test("button is disabled when checkbox is unchecked", () => {
