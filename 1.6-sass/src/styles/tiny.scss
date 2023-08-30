@@ -1,0 +1,27 @@
+$properties: m p;
+$directions: (
+  t: top,
+  b: bottom,
+  l: left,
+  r: right,
+);
+
+@each $p in $properties {
+  $property: padding;
+  @if $p == m {
+    $property: margin;
+  }
+
+  @each $d in $directions {
+    /* #{$d} */
+    $local-property: #{$property}-#{nth($d, 2)};
+
+    @for $i from 1 through 5 {
+      $size: 5 * $i;
+
+      .#{$p}-#{nth($d, 1)}-#{$size} {
+        #{$local-property}: #{$size}px;
+      }
+    }
+  }
+}

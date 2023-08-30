@@ -140,3 +140,73 @@ Mixins support passing a declaration blocks. You can define what mixin will incl
     }
 }
 ```
+
+## Functions
+
+SASS provides a set of functions to modify the colors https://sass-lang.com/documentation/modules/.
+
+## Data Structures
+
+### Lists
+
+Values separated by spaces or commas. e. g. `$list: 0 0 2px #000;`
+
+The `nth` function takes an specifi value from a list.
+
+```scss
+/* parenthesis and comma are groups and separators for lists */
+$gradients:
+    (to left top, blue, red), /* first item in the list */
+    (to left top, blue, yellow) /* second item in the list */;
+
+.foo {
+    background: linear-gradient(nth($gradients, 2)); /* (to left top, blue, yellow) */
+}
+```
+
+## Control Flow
+
+`@if`
+
+```scss
+@mixin foo($size) {
+    font-size: $size;
+    @if $size > 20 {
+        line-height: $size;
+    }
+}
+
+.small {
+    /* it will ignore line-height */
+    @include foo(14px);
+}
+
+.larget {
+    /* it will include line-height */
+    @include foo(24px);
+}
+```
+
+`@for`: range iteration. Ranges are define as `from [start] through [end]`
+
+```scss
+@for $i from 1 through 5 {
+    /* string interpolation #{} */
+    /* will produce h1, h2, h3, h4, h5 */
+    h#{$i} {
+        font-size: 5rem - $i * 0.75rem;
+    }
+}
+```
+
+`@each`: list iteration.
+
+```scss
+$list: 0 0 2px #000;
+
+.foo {
+    @each $i in $list {
+        /* #{$i} */
+    }
+}
+```
