@@ -210,3 +210,79 @@ $list: 0 0 2px #000;
     }
 }
 ```
+
+## BEM
+
+__Block__: standalone enity, meaningful on its own. e. g. header, container, menu, checkbox, input, button.
+
+__Element__: A part of a block that has no standalone meaning, and is semantically tied to its block. e. g. menu-item, list-item, checkbox-caption, header-title.
+
+__Modifier__: A flag on a block or element, used to change appearance and/or behavior. e. g. disabled, highligted, checked, size-big, color-yellow.
+
+```html
+<div class="textfield">
+    <label for="first-name" class="textfield__label">
+        First name
+    </label>
+    <input name="first-name" type="email" class="textfield__input" />
+    <span class="textfield__validation-error">
+
+    </span>
+</div>
+```
+
+```scss
+/* block */
+.textfield {
+    /* element */
+    &__input { }
+    &__label { }
+    &__validation-error { }
+
+    /* modifier */
+    &.textfield--state-error { }
+    &.textfield--state-validated { }
+}
+```
+
+`@extend` keyword allows to reuse styles the same way as a `@include` with mixins but it does not duplicate the styles and generate share CSS instead.
+
+```scss
+/* placehoder starts with '%' */
+/* a placeholder does not generate CSS class */
+/* it could be a .danger class */
+%danger {
+    background-color: red;
+    color: white;
+}
+
+.btn-danger {
+    @extend %danger;
+    padding: 2px;
+}
+
+.alert-danger {
+    @extend %danger;
+    width: 100%;
+}
+```
+
+```css
+/* .danger class would be generated if a class was used instead of a placeholder */
+/* .danger */
+.btn-danger,
+.alert-danger {
+    background-color: red;
+    color: white;
+}
+
+.btn-danger {
+    padding: 2px;
+}
+
+.alert-danger {
+    width: 100%;
+}
+```
+
+Alert: Use `@extends` cautiously because it can generate a lot of CSS garbage.
