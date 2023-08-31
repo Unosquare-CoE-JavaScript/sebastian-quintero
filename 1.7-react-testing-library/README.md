@@ -102,3 +102,28 @@ const customRender = (ui, options) =>
 export * from '@testing-library/react';
 export { customRender as render };
 ```
+
+### Mocks as Props
+
+When a function is called in the tests, but doesn't matter for test. Hypothetical: context updater passed as a prop.
+
+`jest.fn()` or `vi.fn()`:
+* Mock function
+* Does not do anything
+* Merely a placeholder to avoid errors
+
+### Standard Questions to Ask
+
+* What to render?
+    * What's the smallest component that encompasses tests?
+* Do we need to pass any props?
+* Do we need to wrap in, say, `Context.Provider`?
+    * Does the provider get used? Is it already wrapped within the component?
+* Where should the tests go?
+    * which file?
+* What to test?
+    * What's the behavior that needs testing?
+* How to test?
+    * What queries and events?
+* Should we `await`?
+    * Is there any `async` task?
