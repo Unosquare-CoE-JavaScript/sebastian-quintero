@@ -76,3 +76,29 @@ logRoles(container);
 Use `findBy` methods to access elements that could have an asyncrhonous behavior.
 
 Use `waitFor` to prevent raise conditions. Sometimes a set of asynchronous tasks could be resolved a different times between different machines. If you are expecting all asynchronous behavior to be resolved right the way, probably one or many of those could not finish at a time. `waitFor` allows to wait until the condition is met or a timeout happen.
+
+### Custom Render
+
+When a context is needed in order to make the componets work a custom renderer could be created to be shared between the test that would need it.
+
+```jsx
+import { render } from '@testing-library/react';
+
+function AllProviders = ({ children }) {
+    return (
+        <ThemeProvider>
+            <ReduxContext.Provider>
+                <CustomContext.Provider>
+                    {children}
+                </CustomContext.Provider>
+            </ReduxContext.Provider>
+        </ThemeProvider>
+    );
+}
+
+const customRender = (ui, options) =>
+    render(ui, { wrapper: AllProviders, ...options });
+
+export * from '@testing-library/react';
+export { customRender as render };
+```

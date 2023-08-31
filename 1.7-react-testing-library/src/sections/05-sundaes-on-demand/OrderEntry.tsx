@@ -1,3 +1,4 @@
+import { GrandTotal } from "./GrandTotal";
 import { Options } from "./Options";
 
 export const OrderEntry: React.FC = () => {
@@ -5,6 +6,7 @@ export const OrderEntry: React.FC = () => {
     <div>
       <Options type="scoops" />
       <Options type="toppings" />
+      <GrandTotal />
     </div>
   );
 };

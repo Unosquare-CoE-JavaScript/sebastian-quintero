@@ -3,6 +3,13 @@ import { ScoopOption } from "./ScoopOption";
 import { Item } from "./item.model";
 import { Alert, Row } from "react-bootstrap";
 import { ToppingOption } from "./ToppingOption";
+import { ScoopsTotal } from "../06-sundaes-on-demand/ScoopsTotal";
+import { ToppingsTotal } from "../06-sundaes-on-demand/ToppingsTotal";
+
+const ITEM_TOTAL_COMPONENT_MAP: Record<string, React.FC> = {
+  scoops: ScoopsTotal,
+  toppings: ToppingsTotal,
+};
 
 const ITEM_COMPONENT_MAP: Record<string, React.FC<Item>> = {
   scoops: ScoopOption,
@@ -39,18 +46,24 @@ export const Options: React.FC<OptionsProps> = ({ type }) => {
     };
   }, [type]);
 
+  const title = type[0].toUpperCase() + type.substring(1);
+  const ItemTotalComponent = ITEM_TOTAL_COMPONENT_MAP[type];
   const ItemComponent = ITEM_COMPONENT_MAP[type];
 
   return (
-    <Row>
-      {error ? (
-        <Alert variant="danger" onClose={() => setError(false)} dismissible>
-          Something goes wrong!
-        </Alert>
-      ) : null}
-      {items.map((item) => (
-        <ItemComponent key={item.name} {...item} />
-      ))}
-    </Row>
+    <>
+      <h2>{title}</h2>
+      <ItemTotalComponent />
+      <Row>
+        {error ? (
+          <Alert variant="danger" onClose={() => setError(false)} dismissible>
+            Something goes wrong!
+          </Alert>
+        ) : null}
+        {items.map((item) => (
+          <ItemComponent key={item.name} {...item} />
+        ))}
+      </Row>
+    </>
   );
 };
