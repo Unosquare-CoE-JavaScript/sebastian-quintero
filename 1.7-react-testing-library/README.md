@@ -74,3 +74,5 @@ logRoles(container);
 ### Asynchronous
 
 Use `findBy` methods to access elements that could have an asyncrhonous behavior.
+
+Use `waitFor` to prevent raise conditions. Sometimes a set of asynchronous tasks could be resolved a different times between different machines. If you are expecting all asynchronous behavior to be resolved right the way, probably one or many of those could not finish at a time. `waitFor` allows to wait until the condition is met or a timeout happen.
