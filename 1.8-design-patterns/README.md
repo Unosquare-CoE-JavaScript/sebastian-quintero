@@ -78,13 +78,13 @@ const catesian = PointFactory.newCartesian(x, y);
 const polar = PointFactory.newPolar(r, theta);
 ```
 
-### Prototype
+## Prototype
 
 > A partially or fully initialized object that you copy (clone) and make use of.
 
 Prototype is a set of object's properties that can be cloned into another object so the new object is fully customizable without modifying the original one.
 
-### Singleton
+## Singleton
 
 > A component which is instantiated only once.
 
@@ -92,20 +92,26 @@ Global reference to a class' instance encapsulated within the class. It uses a m
 
 ⚠️ Warning: Dependency is a better approach rather than singleton.
 
-### Adapter
+## Adapter
 
 > A construct which adapts an existing interface X to conform to the required interface Y.
 
 Create a new object which aggregates the adaptee.
 
-### Bridge
+## Bridge
 
 > A mechanism that decouples an interface (hierarchy) from an implementation (hierarchy).
 
 Stronger form of encapsulation. It decouples abstraction from implementation and allows communication between multiple inheritances.
 
-### Composite
+## Composite
 
 > A mechanism for treating individual (scalar) objects and compositions of objects in a uniform manner.
 
 An object that is like a single object when use externaly and can act like a collection for internal use. Treat individual objects as well as aggregated objects in a uniform fashion.
+
+## Decorator
+
+> Facilitates the addition of behaviors to individual objects without inheriting from them.
+
+It's a wrapper around certain class which gives additional functionality or extra behavior and doesn't affect the underline implementation.
