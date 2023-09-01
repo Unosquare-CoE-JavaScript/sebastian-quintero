@@ -90,4 +90,10 @@ Prototype is a set of object's properties that can be cloned into another object
 
 Global reference to a class' instance encapsulated within the class. It uses a method that instantiates only once and then return that instance for subsequent invokations.
 
-Warning: Dependency is a better approach rather than singleton.
+⚠️ Warning: Dependency is a better approach rather than singleton.
+
+### Adapter
+
+> A construct which adapts an existing interface X to conform to the required interface Y.
+
+Create a new object which aggregates the adaptee.
