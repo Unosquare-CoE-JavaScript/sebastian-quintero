@@ -77,3 +77,9 @@ A method or a class that instantiates another class which contains the data. As 
 const catesian = PointFactory.newCartesian(x, y);
 const polar = PointFactory.newPolar(r, theta);
 ```
+
+### Prototype
+
+> A partially or fully initialized object that you copy (clone) and make use of.
+
+Prototype is a set of object's properties that can be cloned into another object so the new object is fully customizable without modifying the original one.
