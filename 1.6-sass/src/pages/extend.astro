@@ -1,0 +1,33 @@
+---
+import Page from "../components/page.astro";
+import "../styles/extend.scss";
+---
+
+<Page>
+  <h1>@extend Buttons</h1>
+  <!-- BEGIN EXERCISE -->
+  <p>
+    <button class="btn btn-primary">Click Me!</button>
+    <label>Primary</label>
+  </p>
+
+  <p>
+    <button class="btn btn-secondary">Click Me!</button>
+    <label>Secondary</label>
+  </p>
+
+  <p>
+    <button class="btn btn-primary" disabled>Click Me!</button>
+    <label>Primary Disabled</label>
+  </p>
+
+  <p>
+    <button class="btn btn-secondary" disabled>Click Me!</button>
+    <label>Secondary Disabled</label>
+  </p>
+  <p class="unstyled">
+    <button class="no-style" disabled>Click Me!</button>
+    <button class="btn" disabled>Click Me!</button>
+    <label>These should remain unstyled</label>
+  </p>
+</Page>
