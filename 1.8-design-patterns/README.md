@@ -83,3 +83,11 @@ const polar = PointFactory.newPolar(r, theta);
 > A partially or fully initialized object that you copy (clone) and make use of.
 
 Prototype is a set of object's properties that can be cloned into another object so the new object is fully customizable without modifying the original one.
+
+### Singleton
+
+> A component which is instantiated only once.
+
+Global reference to a class' instance encapsulated within the class. It uses a method that instantiates only once and then return that instance for subsequent invokations.
+
+Warning: Dependency is a better approach rather than singleton.
