@@ -103,3 +103,9 @@ Create a new object which aggregates the adaptee.
 > A mechanism that decouples an interface (hierarchy) from an implementation (hierarchy).
 
 Stronger form of encapsulation. It decouples abstraction from implementation and allows communication between multiple inheritances.
+
+### Composite
+
+> A mechanism for treating individual (scalar) objects and compositions of objects in a uniform manner.
+
+An object that is like a single object when use externaly and can act like a collection for internal use. Treat individual objects as well as aggregated objects in a uniform fashion.
