@@ -115,3 +115,9 @@ An object that is like a single object when use externaly and can act like a col
 > Facilitates the addition of behaviors to individual objects without inheriting from them.
 
 It's a wrapper around certain class which gives additional functionality or extra behavior and doesn't affect the underline implementation.
+
+## Facade
+
+> Provides a simple, easy to understand/user interface over a large and sophisticated body of code.
+
+Use a set of classes internaly to simplify their API. It may expose internal methods.
