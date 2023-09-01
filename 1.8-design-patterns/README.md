@@ -97,3 +97,9 @@ Global reference to a class' instance encapsulated within the class. It uses a m
 > A construct which adapts an existing interface X to conform to the required interface Y.
 
 Create a new object which aggregates the adaptee.
+
+### Bridge
+
+> A mechanism that decouples an interface (hierarchy) from an implementation (hierarchy).
+
+Stronger form of encapsulation. It decouples abstraction from implementation and allows communication between multiple inheritances.
