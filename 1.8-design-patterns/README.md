@@ -121,3 +121,9 @@ It's a wrapper around certain class which gives additional functionality or extr
 > Provides a simple, easy to understand/user interface over a large and sophisticated body of code.
 
 Use a set of classes internaly to simplify their API. It may expose internal methods.
+
+## Flyweight
+
+> A space optimization technique that lets us use less memory by storing externally the data associated with similar objects.
+
+Store repeating data externally so it can be reference by the class and decrease the amount of memory used.
