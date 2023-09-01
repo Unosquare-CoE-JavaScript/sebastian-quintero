@@ -59,3 +59,21 @@ It is not related to "dependendy injection", "dependency injection" is a effect 
 > When piecewise object construction is complicated, provide an API for doing it succinctly.
 
 It is used for complex object creation, lots of constructor parameters or complex initialization. Builders that returns `this` are _fluent_ allowing for chaining the object properties.
+
+```js
+const html = new HtmlBuilder('ul')
+    .addTag('li')
+    .addChild('text')
+    .build(); // <ul><li>text</li></ul>
+```
+
+## Factory
+
+> A component responsible solely for the wholesale (not piecewise) creation of objects.
+
+A method or a class that instantiates another class which contains the data. As a class exposes methods for the different variants for the object its creating. Abstract factories doesn't separate by methods but keep an internal mapping to the different classes instead.
+
+```js
+const catesian = PointFactory.newCartesian(x, y);
+const polar = PointFactory.newPolar(r, theta);
+```

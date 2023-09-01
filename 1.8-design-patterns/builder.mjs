@@ -37,19 +37,23 @@ class ConstructorMethodBuilder {
 }
 
 class CodeBuilder {
-  constructor(className, object = {}) {
+  constructor(
+    className,
+    object = {},
+    MethodBuilder = ConstructorMethodBuilder
+  ) {
     this.className = className;
     this.object = object;
-    this.constructorMethod = new ConstructorMethodBuilder(this.object);
+    this.methodBuilder = new MethodBuilder(this.object);
   }
 
   addField(fieldName) {
-    this.constructorMethod.addField(fieldName);
+    this.methodBuilder.addField(fieldName);
     return this;
   }
 
   toString() {
-    const constructorMethod = this.constructorMethod.toString(); // TODO
+    const constructorMethod = this.methodBuilder.toString(); // TODO
     return `class ${this.className} {\n${constructorMethod}\n}`;
   }
 }
