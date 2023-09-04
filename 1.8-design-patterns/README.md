@@ -189,3 +189,9 @@ Snapshot of the state for a certain point in time of a system.
 > Enables the exact behavior of a system to be selected at run-time.
 
 Same algorithm at the high level with many implementations at the low level.
+
+## Template Method
+
+> Allows us to define the 'skeleton' of the algorithm, with concrete implementations defined in subclasses.
+
+Same idea as strategy but template is done using inheritance.
