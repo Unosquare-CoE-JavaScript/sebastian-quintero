@@ -127,3 +127,9 @@ Use a set of classes internaly to simplify their API. It may expose internal met
 > A space optimization technique that lets us use less memory by storing externally the data associated with similar objects.
 
 Store repeating data externally so it can be reference by the class and decrease the amount of memory used.
+
+## Proxy
+
+> A class that functions as an interface to a particular resource. That resource may be remote, expensive to construct, or may require logging or some other added functionality.
+
+Same interface as the underlying object but adds extra functionality in the top call for certain class' method/attribute within the underlying object. In fact, allows to add relevant functionality to the redefined member functions.
