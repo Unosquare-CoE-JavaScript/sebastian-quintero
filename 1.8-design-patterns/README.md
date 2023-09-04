@@ -133,3 +133,17 @@ Store repeating data externally so it can be reference by the class and decrease
 > A class that functions as an interface to a particular resource. That resource may be remote, expensive to construct, or may require logging or some other added functionality.
 
 Same interface as the underlying object but adds extra functionality in the top call for certain class' method/attribute within the underlying object. In fact, allows to add relevant functionality to the redefined member functions.
+
+## Chain of Responsability
+
+> A chain of components who all get a chance to process a command or a query, optionally having default processing implementation and an aility to terminate the processing chain.
+
+It could be a chain of reference or a centralized construct.
+
+### Command Query Separation
+
+__Command__: Asking for an action or change.
+
+__Query__: Asking for information.
+
+__CQS__: Having separate means of sending commands and queries.
