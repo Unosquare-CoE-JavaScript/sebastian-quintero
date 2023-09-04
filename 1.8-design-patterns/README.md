@@ -183,3 +183,9 @@ Snapshot of the state for a certain point in time of a system.
 > A pattern in which the object's behavior is determined by its state. An object transitions from one state to another (something needs to trigger a transition).
 
 > A formalized construct which manages state and transitions is called a state machine.
+
+## Strategy
+
+> Enables the exact behavior of a system to be selected at run-time.
+
+Same algorithm at the high level with many implementations at the low level.
