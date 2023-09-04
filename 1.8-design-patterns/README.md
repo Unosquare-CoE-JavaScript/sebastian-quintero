@@ -153,3 +153,7 @@ __CQS__: Having separate means of sending commands and queries.
 > An object which represents an instruction to perform a particular action. Contains all the information necessary for the action to be taken.
 
 It encapsulates all the details of an operation in an object and define the instruction either itself or elsewhere and optionally define the undoing command instructions.
+
+## Interpreter
+
+> A component that processes structured text data. Does so by turning it into separate lexical tokens (lexing) and then interpreting sequences of said tokens (parsing).
