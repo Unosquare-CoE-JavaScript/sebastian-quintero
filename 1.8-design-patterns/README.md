@@ -195,3 +195,13 @@ Same algorithm at the high level with many implementations at the low level.
 > Allows us to define the 'skeleton' of the algorithm, with concrete implementations defined in subclasses.
 
 Same idea as strategy but template is done using inheritance.
+
+## Visitor
+
+> A component (visitor) that knows how to traverse a data structure composed of (possibly related) types.
+
+Instrusive visitor: Implement the algorithm inside the class (breaks SRP & OCP)
+
+Reflective visitor: Implemented outside of class so could access everything inside the class.
+
+Classic visitor: Implement an `accept` method to receive the visitor, and call `visitFoo` if class is `Foo` or `visitBar` if class is `Bar`.
