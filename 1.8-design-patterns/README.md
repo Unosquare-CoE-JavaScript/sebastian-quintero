@@ -173,3 +173,7 @@ Every single in the system refers to prevent a reference to each other in every 
 > A token/handle representing the system state. Lets us roll back to the state when the token was generated. May or may not directly expose state information.
 
 Snapshot of the state for a certain point in time of a system.
+
+## Observer
+
+> An observer is an object that wishes to be informed about events happening in the system. The entity generating the events is an observable.
