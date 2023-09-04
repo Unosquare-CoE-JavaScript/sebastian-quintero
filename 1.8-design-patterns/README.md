@@ -157,3 +157,7 @@ It encapsulates all the details of an operation in an object and define the inst
 ## Interpreter
 
 > A component that processes structured text data. Does so by turning it into separate lexical tokens (lexing) and then interpreting sequences of said tokens (parsing).
+
+## Iterator
+
+> An object that facilitates the traversal of a data structure.
