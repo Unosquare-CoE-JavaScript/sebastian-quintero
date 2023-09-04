@@ -161,3 +161,9 @@ It encapsulates all the details of an operation in an object and define the inst
 ## Iterator
 
 > An object that facilitates the traversal of a data structure.
+
+## Mediator
+
+> A component that facilitates communication between other components without them necessarily being aware of each other or having direct (reference) access to each other.
+
+Every single in the system refers to prevent a reference to each other in every object of a system. Every object could send a message to another one without referencing it.
