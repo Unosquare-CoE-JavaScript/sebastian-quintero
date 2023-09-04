@@ -147,3 +147,9 @@ __Command__: Asking for an action or change.
 __Query__: Asking for information.
 
 __CQS__: Having separate means of sending commands and queries.
+
+## Command
+
+> An object which represents an instruction to perform a particular action. Contains all the information necessary for the action to be taken.
+
+It encapsulates all the details of an operation in an object and define the instruction either itself or elsewhere and optionally define the undoing command instructions.
