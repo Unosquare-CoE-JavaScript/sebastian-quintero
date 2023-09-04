@@ -177,3 +177,9 @@ Snapshot of the state for a certain point in time of a system.
 ## Observer
 
 > An observer is an object that wishes to be informed about events happening in the system. The entity generating the events is an observable.
+
+## State
+
+> A pattern in which the object's behavior is determined by its state. An object transitions from one state to another (something needs to trigger a transition).
+
+> A formalized construct which manages state and transitions is called a state machine.
