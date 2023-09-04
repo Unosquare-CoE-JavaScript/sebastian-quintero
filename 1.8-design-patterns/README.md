@@ -167,3 +167,9 @@ It encapsulates all the details of an operation in an object and define the inst
 > A component that facilitates communication between other components without them necessarily being aware of each other or having direct (reference) access to each other.
 
 Every single in the system refers to prevent a reference to each other in every object of a system. Every object could send a message to another one without referencing it.
+
+## Memento
+
+> A token/handle representing the system state. Lets us roll back to the state when the token was generated. May or may not directly expose state information.
+
+Snapshot of the state for a certain point in time of a system.
