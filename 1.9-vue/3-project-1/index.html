@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Project 1</title>
+
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <main>
+        <h3>CSS</h3>
+        <section class="settings">
+          <div class="settings__container">
+            <label>
+              <span>perspective: {{ perspective }}px</span>
+              <input
+                v-model.number="perspective"
+                type="range"
+                min="0"
+                max="999"
+              />
+            </label>
+
+            <label>
+              <span>rotate x: {{ rotateX }}deg</span>
+              <input
+                v-model.number="rotateX"
+                type="range"
+                min="-180"
+                max="180"
+              />
+            </label>
+
+            <label>
+              <span>rotate y: {{ rotateY }}deg</span>
+              <input
+                v-model.number="rotateY"
+                type="range"
+                min="-180"
+                max="180"
+              />
+            </label>
+
+            <label>
+              <span>rotate z: {{ rotateZ }}deg</span>
+              <input
+                v-model.number="rotateZ"
+                type="range"
+                min="-180"
+                max="180"
+              />
+            </label>
+
+            <div class="settings__actions">
+              <button type="button" @click="reset">Reset</button>
+              <button type="button" @click="copy">Copy</button>
+            </div>
+          </div>
+        </section>
+        <section class="output">
+          <div class="output__container">
+            <div class="output__box" :style="boxStyle"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

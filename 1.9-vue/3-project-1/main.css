@@ -1,0 +1,76 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #213;
+}
+
+#app {
+  width: 100%;
+  min-height: 100dvh;
+  display: grid;
+  align-content: center;
+}
+
+main {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 36rem;
+}
+
+main h3 {
+  grid-column: span 2;
+  text-align: center;
+  color: mediumslateblue;
+}
+
+.settings__container {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.settings__container label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.settings__container label span {
+  color: white;
+}
+
+.settings__actions {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.settings__actions button {
+  padding: 0.5rem;
+  width: 100%;
+  border: none;
+  background-color: mediumslateblue;
+  color: white;
+}
+
+.output {
+  display: flex;
+}
+
+.output__container {
+  display: flex;
+  flex-grow: 1;
+  padding: 2rem;
+  border: 1px solid mediumslateblue;
+  overflow: hidden;
+}
+
+.output__box {
+  flex-grow: 1;
+  background-color: mediumslateblue;
+}
