@@ -1,12 +1,25 @@
 <script>
+import { mapWritableState } from 'pinia'
 import AppAuth from './components/AppAuth.vue'
 import AppHeader from './components/AppHeader.vue'
+import { useUserStore } from './stores/user'
+import { auth } from './includes/fake-server'
 
 export default {
   name: 'App',
   components: {
     AppHeader,
     AppAuth
+  },
+  computed: {
+    ...mapWritableState(useUserStore, {
+      userIsLoggedIn: 'isLoggedIn'
+    })
+  },
+  created() {
+    if (auth.currentUser) {
+      this.userIsLoggedIn = true
+    }
   }
 }
 </script>

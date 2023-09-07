@@ -60,12 +60,21 @@ function setItem(key, value) {
   localStorage.setItem(key, JSON.stringify(value))
 }
 
-var id = fromLocal('_id', 1)
-var users = fromLocal('_users', {})
-var collections = fromLocal('_collections', {})
+var idStore = fromLocal('_id', 1)
+var currentUserUidStore = fromLocal('_current_user_uid', null)
+var userStore = fromLocal('_users', {})
+var collectionStore = fromLocal('_collections', {})
 
 function usersExists(email) {
-  return Object.values(users).some((user) => user.email === email)
+  return Object.values(userStore.value).some((credentials) => credentials?.user?.email === email)
+}
+
+function usersEmailPasswordExists(email, password) {
+  console.log(userStore)
+  console.log(userStore.value)
+  return Object.values(userStore.value).some(
+    (credentials) => credentials?.user?.email === email && credentials?.user?.password === password
+  )
 }
 
 const LATENCY = 300
@@ -73,34 +82,83 @@ const STD = 70
 
 const fake = {
   auth() {
+    var currentUser =
+      currentUserUidStore.value != null ? userStore.value[currentUserUidStore.value] : null
+
     function createUserWithEmailAndPassword(email, password) {
       return new Promise((resolve, reject) => {
         if (usersExists(email)) {
           return reject()
         }
 
-        const user = { id: id.value, email, password }
-        users.value[id.value++] = user
+        const user = { uid: idStore.value, email, password }
+        const credentials = { user }
+        userStore.value[idStore.value++] = credentials
 
-        resolve(user)
+        currentUserUidStore.value = credentials.user.uid
+        authObject.currentUser = credentials
+
+        resolve(credentials)
       })
     }
 
-    return {
-      createUserWithEmailAndPassword: withLatency(createUserWithEmailAndPassword, LATENCY, STD)
-    }
-  },
-  store() {
-    async function add(doc) {
-      collections.value[name].push(doc)
+    function signInWithEmailAndPassword(email, password) {
+      return new Promise((resolve, reject) => {
+        if (!usersEmailPasswordExists(email, password)) {
+          return reject()
+        }
+
+        const credentials = Object.values(userStore.value).find(
+          (credentials) =>
+            credentials.user.email === email && credentials.user.password === password
+        )
+
+        currentUserUidStore.value = credentials.user.uid
+        authObject.currentUser = credentials
+
+        resolve(credentials)
+      })
     }
 
+    function singOut() {
+      return new Promise((resolve) => {
+        currentUserUidStore.value = null
+        authObject.currentUser = null
+
+        resolve()
+      })
+    }
+
+    var authObject = {
+      currentUser,
+      createUserWithEmailAndPassword: withLatency(createUserWithEmailAndPassword, LATENCY, STD),
+      signInWithEmailAndPassword: withLatency(signInWithEmailAndPassword, LATENCY, STD),
+      singOut: withLatency(singOut, LATENCY, STD)
+    }
+
+    return authObject
+  },
+  store() {
     function collection(name) {
-      if (collections.value[name] == null) {
-        collections.value[name] = []
+      if (collectionStore.value[name] == null) {
+        collectionStore.value[name] = {}
       }
+
       return {
-        add: withLatency(add, LATENCY, STD)
+        doc(docId) {
+          async function add(data) {
+            collectionStore.value[name][docId] = data
+          }
+
+          return {
+            add: withLatency(add, LATENCY, STD)
+          }
+        },
+
+        async add(data) {
+          const uuid = crypto.randomUUID()
+          return this.doc(uuid).add(data)
+        }
       }
     }
 

@@ -7,9 +7,9 @@ export const useUserStore = defineStore('user', {
   }),
   actions: {
     async register(values) {
-      await auth.createUserWithEmailAndPassword(values.email, values.password)
+      const credentials = await auth.createUserWithEmailAndPassword(values.email, values.password)
 
-      await usersCollection.add({
+      await usersCollection.doc(credentials.user.uid).add({
         name: values.name,
         email: values.email,
         age: values.age,
@@ -17,6 +17,16 @@ export const useUserStore = defineStore('user', {
       })
 
       this.isLoggedIn = true
+    },
+    async authenticate(values) {
+      await auth.signInWithEmailAndPassword(values.email, values.password)
+
+      this.isLoggedIn = true
+    },
+    async singOut() {
+      await auth.singOut()
+
+      this.isLoggedIn = false
     }
   }
 })
