@@ -16,6 +16,15 @@ export default {
       // mapStores
       // this.modalStore.isOpen = !this.modalStore.isOpen
       this.isOpen = !this.isOpen
+    },
+    async signOut() {
+      await this.userStore.signOut()
+
+      // Check for name is not scalable
+      // if (this.$route.name === 'manage') {
+      if (this.$route.requiresAuth) {
+        this.$router.push({ name: 'home' })
+      }
     }
   },
   components: { RouterLink }
@@ -27,7 +36,13 @@ export default {
   <header id="header" class="bg-gray-700">
     <nav class="container mx-auto flex justify-start items-center py-5 px-4">
       <!-- App Name -->
-      <RouterLink class="text-white font-bold uppercase text-2xl mr-4" to="/"> Music </RouterLink>
+      <RouterLink
+        class="text-white font-bold uppercase text-2xl mr-4"
+        :to="{ name: 'home' }"
+        exact-active-class="no-active"
+      >
+        Music
+      </RouterLink>
 
       <div class="flex flex-grow items-center">
         <!-- Primary Navigation -->
@@ -46,7 +61,7 @@ export default {
               <RouterLink class="px-2 text-white" to="/manage">Manage</RouterLink>
             </li>
             <li>
-              <a class="px-2 text-white" href="#" @click.prevent="userStore.singOut">Logout</a>
+              <a class="px-2 text-white" href="#" @click.prevent="signOut">Logout</a>
             </li>
           </template>
         </ul>

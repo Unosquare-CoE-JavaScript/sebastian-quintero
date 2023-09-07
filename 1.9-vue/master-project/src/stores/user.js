@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user', {
 
       this.isLoggedIn = true
     },
-    async singOut() {
+    async signOut() {
       await auth.singOut()
 
       this.isLoggedIn = false
