@@ -1,3 +1,17 @@
+function latency(mu, std) {
+  return Math.floor(std * (2 * Math.random() - 1) + mu)
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+function withLatency(fn, ms, std) {
+  return function delayed() {
+    return sleep(latency(ms, std)).then(fn.bind(null, ...arguments))
+  }
+}
+
 function reactive(object, onChange) {
   if (object == null) {
     return object
@@ -54,33 +68,42 @@ function usersExists(email) {
   return Object.values(users).some((user) => user.email === email)
 }
 
-function createUserWithEmailAndPassword(email, password) {
-  return new Promise((resolve, reject) => {
-    if (usersExists(email)) {
-      return reject()
-    }
-
-    const user = { id: id.value, email, password }
-    users.value[id.value++] = user
-
-    resolve(user)
-  })
-}
-
-function collection(name) {
-  collections.value[name] = []
-  return {
-    async add(doc) {
-      collections.value[name].push(doc)
-    }
-  }
-}
+const LATENCY = 300
+const STD = 70
 
 const fake = {
   auth() {
-    return { createUserWithEmailAndPassword }
+    function createUserWithEmailAndPassword(email, password) {
+      return new Promise((resolve, reject) => {
+        if (usersExists(email)) {
+          return reject()
+        }
+
+        const user = { id: id.value, email, password }
+        users.value[id.value++] = user
+
+        resolve(user)
+      })
+    }
+
+    return {
+      createUserWithEmailAndPassword: withLatency(createUserWithEmailAndPassword, LATENCY, STD)
+    }
   },
   store() {
+    async function add(doc) {
+      collections.value[name].push(doc)
+    }
+
+    function collection(name) {
+      if (collections.value[name] == null) {
+        collections.value[name] = []
+      }
+      return {
+        add: withLatency(add, LATENCY, STD)
+      }
+    }
+
     return { collection }
   }
 }
