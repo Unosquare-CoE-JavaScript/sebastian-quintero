@@ -91,6 +91,7 @@ const STD = 70
 function snapshot(id, data) {
   return {
     id,
+    exists: data != null,
     data() {
       return JSON.parse(JSON.stringify(data))
     }
@@ -108,7 +109,7 @@ const fake = {
           return reject()
         }
 
-        const user = { uid: idStore.value, email, password }
+        const user = { uid: idStore.value, displayName: email.split('@')[0], email, password }
         const credentials = { user }
         userStore.value[idStore.value++] = credentials
 
@@ -172,12 +173,14 @@ const fake = {
           return this
         },
         doc(docId) {
+          async function get() {
+            return snapshot(docId, collectionStore.value[name][docId])
+          }
+
           async function add(data) {
             collectionStore.value[name][docId] = data
             return {
-              async get() {
-                return snapshot(docId, collectionStore.value[name][docId])
-              }
+              get
             }
           }
 
@@ -188,6 +191,7 @@ const fake = {
           }
 
           return {
+            get: withLatency(get, LATENCY, STD),
             add: withLatency(add, LATENCY, STD),
             update: withLatency(update, LATENCY, STD),
             delete: withLatency(
@@ -216,7 +220,12 @@ const fake = {
             async get() {
               let records = []
               for (const [docId, data] of Object.entries(collectionStore.value[name])) {
-                let result = eval(`data['${key}']${op}${value}`)
+                let result
+                if (typeof value === 'string') {
+                  result = eval(`data['${key}']${op}'${value}'`)
+                } else {
+                  result = eval(`data['${key}']${op}${value}`)
+                }
                 if (result) {
                   records.push(snapshot(docId, data))
                 }
@@ -340,3 +349,5 @@ export const storage = fake.storage()
 export const usersCollection = db.collection('users')
 
 export const songsCollection = db.collection('songs')
+
+export const commentsCollection = db.collection('comments')
