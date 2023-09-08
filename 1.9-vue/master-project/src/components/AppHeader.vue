@@ -9,7 +9,10 @@ export default {
   computed: {
     ...mapStores(useModalStore, useUserStore),
     // maps only properties but works the same as above
-    ...mapWritableState(useModalStore, ['isOpen'])
+    ...mapWritableState(useModalStore, ['isOpen']),
+    currentLocale() {
+      return this.$i18n.locale === 'es' ? 'English' : 'Spanish'
+    }
   },
   methods: {
     toggleAuthModal() {
@@ -25,6 +28,9 @@ export default {
       if (this.$route.requiresAuth) {
         this.$router.push({ name: 'home' })
       }
+    },
+    changeLocale() {
+      this.$i18n.locale = this.$i18n.locale === 'es' ? 'en' : 'es'
     }
   },
   components: { RouterLink }
@@ -64,6 +70,14 @@ export default {
               <a class="px-2 text-white" href="#" @click.prevent="signOut">Logout</a>
             </li>
           </template>
+        </ul>
+
+        <ul class="ml-auto">
+          <li>
+            <a class="px-2 text-white" href="#" @click.prevent="changeLocale">
+              {{ currentLocale }}
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
