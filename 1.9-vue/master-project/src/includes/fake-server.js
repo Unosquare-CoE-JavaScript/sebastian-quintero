@@ -178,19 +178,30 @@ const fake = {
       var error = new Set()
       var success = new Set()
 
+      var url = ''
+      var cancelled = false
       var snapshot = {
         bytesTransfered: 0,
         totalBytes: file.size,
         ref: {
-          _url: '',
           name: file.name,
           async getDownloadURL() {
-            return this._url
+            return url
           }
         }
       }
 
+      function cleanUp() {
+        progress.clear()
+        error.clear()
+        success.clear()
+      }
+
       function upload() {
+        if (cancelled) {
+          return
+        }
+
         const chunk = random(0.2, 0.3) * snapshot.totalBytes
         snapshot.bytesTransfered = clamp(
           snapshot.bytesTransfered + chunk,
@@ -203,16 +214,14 @@ const fake = {
         })
 
         if (snapshot.bytesTransfered >= snapshot.totalBytes) {
-          snapshot.ref._url = URL.createObjectURL(file)
+          url = URL.createObjectURL(file)
 
           // TODO: check file limitations and trigger error callbacks
           success.forEach((callback) => {
             callback()
           })
 
-          progress.clear()
-          error.clear()
-          success.clear()
+          cleanUp()
         }
 
         if (snapshot.bytesTransfered < snapshot.totalBytes) {
@@ -229,7 +238,13 @@ const fake = {
         success.add(successCallback)
       }
 
-      return { snapshot, on }
+      function cancel() {
+        cancelled = true
+
+        cleanUp()
+      }
+
+      return { snapshot, on, cancel }
     }
 
     function child(path) {
