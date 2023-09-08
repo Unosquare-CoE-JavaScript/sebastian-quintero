@@ -1,5 +1,13 @@
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(value, min))
+}
+
+function random(min = 0, max = 1) {
+  return (max - min) * Math.random() + min
+}
+
 function latency(mu, std) {
-  return Math.floor(std * (2 * Math.random() - 1) + mu)
+  return Math.floor(std * random(-1, 1) + mu)
 }
 
 function sleep(ms) {
@@ -163,6 +171,76 @@ const fake = {
     }
 
     return { collection }
+  },
+  storage() {
+    function put(file) {
+      var progress = new Set()
+      var error = new Set()
+      var success = new Set()
+
+      var snapshot = {
+        bytesTransfered: 0,
+        totalBytes: file.size,
+        ref: {
+          _url: '',
+          name: file.name,
+          async getDownloadURL() {
+            return this._url
+          }
+        }
+      }
+
+      function upload() {
+        const chunk = random(0.2, 0.3) * snapshot.totalBytes
+        snapshot.bytesTransfered = clamp(
+          snapshot.bytesTransfered + chunk,
+          snapshot.bytesTransfered,
+          snapshot.totalBytes
+        )
+
+        progress.forEach((callback) => {
+          callback(snapshot)
+        })
+
+        if (snapshot.bytesTransfered >= snapshot.totalBytes) {
+          snapshot.ref._url = URL.createObjectURL(file)
+
+          // TODO: check file limitations and trigger error callbacks
+          success.forEach((callback) => {
+            callback()
+          })
+
+          progress.clear()
+          error.clear()
+          success.clear()
+        }
+
+        if (snapshot.bytesTransfered < snapshot.totalBytes) {
+          uploadWithLatency()
+        }
+      }
+
+      var uploadWithLatency = withLatency(upload, LATENCY, STD)
+      uploadWithLatency()
+
+      function on(name, progressCallback, errorCallback, successCallback) {
+        progress.add(progressCallback)
+        error.add(errorCallback)
+        success.add(successCallback)
+      }
+
+      return { snapshot, on }
+    }
+
+    function child(path) {
+      return { put }
+    }
+
+    function ref() {
+      return { child }
+    }
+
+    return { ref }
   }
 }
 
@@ -170,4 +248,8 @@ export const auth = fake.auth()
 
 export const db = fake.store()
 
+export const storage = fake.storage()
+
 export const usersCollection = db.collection('users')
+
+export const songsCollection = db.collection('songs')
