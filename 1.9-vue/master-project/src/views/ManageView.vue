@@ -1,21 +1,41 @@
 <script>
 import AppUpload from '../components/AppUpload.vue'
+import { auth, songsCollection } from '../includes/fake-server'
 import { useUserStore } from '../stores/user'
 
 export default {
   name: 'ManageView',
-  beforeRouteLeave(to, from, next) {
-    this.$refs.upload
-  },
-  beforeRouteEnter(to, from, next) {
-    const store = useUserStore()
-    if (store.isLoggedIn) {
-      next()
-    } else {
-      next({ name: 'home' })
+  components: { AppUpload },
+  data() {
+    return {
+      songs: []
     }
   },
-  components: { AppUpload }
+  async created() {
+    const snapshot = await songsCollection.where('uid', '==', auth.currentUser.uid).get()
+    console.log(snapshot)
+
+    snapshot.forEach((doc) => {
+      const song = {
+        ...doc.data(),
+        docId: doc.id
+      }
+
+      this.songs.push(song)
+    })
+  }
+  // beforeRouteLeave(to, from, next) {
+  //   this.$refs.upload.cancelUploads()
+  //   next()
+  // },
+  // beforeRouteEnter(to, from, next) {
+  //   const store = useUserStore()
+  //   if (store.isLoggedIn) {
+  //     next()
+  //   } else {
+  //     next({ name: 'home' })
+  //   }
+  // },
 }
 </script>
 

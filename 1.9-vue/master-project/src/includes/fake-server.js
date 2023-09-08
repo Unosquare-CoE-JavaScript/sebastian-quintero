@@ -91,7 +91,7 @@ const STD = 70
 const fake = {
   auth() {
     var currentUser =
-      currentUserUidStore.value != null ? userStore.value[currentUserUidStore.value] : null
+      currentUserUidStore.value != null ? userStore.value[currentUserUidStore.value].user : null
 
     function createUserWithEmailAndPassword(email, password) {
       return new Promise((resolve, reject) => {
@@ -104,7 +104,7 @@ const fake = {
         userStore.value[idStore.value++] = credentials
 
         currentUserUidStore.value = credentials.user.uid
-        authObject.currentUser = credentials
+        authObject.currentUser = credentials.user
 
         resolve(credentials)
       })
@@ -122,7 +122,7 @@ const fake = {
         )
 
         currentUserUidStore.value = credentials.user.uid
-        authObject.currentUser = credentials
+        authObject.currentUser = credentials.user
 
         resolve(credentials)
       })
@@ -162,10 +162,28 @@ const fake = {
             add: withLatency(add, LATENCY, STD)
           }
         },
-
         async add(data) {
           const uuid = crypto.randomUUID()
           return this.doc(uuid).add(data)
+        },
+        where(key, op, value) {
+          return {
+            async get() {
+              let records = []
+              for (const [docId, data] of Object.entries(collectionStore.value[name])) {
+                let result = eval(`data['${key}']${op}${value}`)
+                if (result) {
+                  records.push({
+                    id: docId,
+                    data() {
+                      return data
+                    }
+                  })
+                }
+              }
+              return records
+            }
+          }
         }
       }
     }
