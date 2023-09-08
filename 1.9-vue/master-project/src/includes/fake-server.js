@@ -158,8 +158,15 @@ const fake = {
             collectionStore.value[name][docId] = data
           }
 
+          async function update(data) {
+            for (let key in data) {
+              collectionStore.value[name][docId][key] = data[key]
+            }
+          }
+
           return {
-            add: withLatency(add, LATENCY, STD)
+            add: withLatency(add, LATENCY, STD),
+            update: withLatency(update, LATENCY, STD)
           }
         },
         async add(data) {
@@ -176,7 +183,7 @@ const fake = {
                   records.push({
                     id: docId,
                     data() {
-                      return data
+                      return JSON.parse(JSON.stringify(data))
                     }
                   })
                 }
