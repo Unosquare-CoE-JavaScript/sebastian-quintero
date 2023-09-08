@@ -9,7 +9,8 @@ export default {
   components: { AppUpload, CompositionItem },
   data() {
     return {
-      songs: []
+      songs: [],
+      unsaveFlag: false
     }
   },
   methods: {
@@ -27,12 +28,23 @@ export default {
       }
 
       this.songs.push(song)
+    },
+    updateUnsaveFlag(value) {
+      this.unsaveFlag = value
     }
   },
   async created() {
     const snapshot = await songsCollection.where('uid', '==', auth.currentUser.uid).get()
 
     snapshot.forEach(this.addSong)
+  },
+  beforeRouteLeave(to, from, next) {
+    if (!this.unsaveFlag) {
+      next()
+    } else {
+      const leave = confirm('You have unsaved changes. Are you sure you want to leave?')
+      next(leave)
+    }
   }
   // beforeRouteLeave(to, from, next) {
   //   this.$refs.upload.cancelUploads()
@@ -71,6 +83,7 @@ export default {
               :updateSong="updateSong"
               :index="i"
               :removeSong="removeSong"
+              :updateUnsaveFlag="updateUnsaveFlag"
             />
           </div>
         </div>

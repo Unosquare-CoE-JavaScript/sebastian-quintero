@@ -20,6 +20,9 @@ export default {
     removeSong: {
       type: Function,
       required: true
+    },
+    updateUnsaveFlag: {
+      type: Function
     }
   },
   data() {
@@ -63,6 +66,7 @@ export default {
       }
 
       this.updateSong(this.index, updatedValues)
+      this.updateUnsaveFlag(false)
 
       this.in_submission = false
       this.alert_variant = 'bg-green-500'
@@ -115,6 +119,7 @@ export default {
             type="text"
             class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
             placeholder="Enter Song Title"
+            @input="updateUnsaveFlag(true)"
           />
           <ErrorMessage name="title" class="text-red-600" />
         </div>
@@ -125,6 +130,7 @@ export default {
             type="text"
             class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
             placeholder="Enter Genre"
+            @input="updateUnsaveFlag(true)"
           />
           <ErrorMessage name="genre" class="text-red-600" />
         </div>
