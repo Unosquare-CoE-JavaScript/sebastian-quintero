@@ -162,6 +162,15 @@ const fake = {
       }
 
       return {
+        orderBy() {
+          return this
+        },
+        startAfter() {
+          return this
+        },
+        limit() {
+          return this
+        },
         doc(docId) {
           async function add(data) {
             collectionStore.value[name][docId] = data
@@ -190,6 +199,13 @@ const fake = {
               STD
             )
           }
+        },
+        async get() {
+          let records = []
+          for (const [docId, data] of Object.entries(collectionStore.value[name])) {
+            records.push(snapshot(docId, data))
+          }
+          return records
         },
         async add(data) {
           const uuid = crypto.randomUUID()
