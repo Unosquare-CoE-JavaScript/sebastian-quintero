@@ -16,20 +16,23 @@ export default {
     updateSong(i, values) {
       this.songs[i].modified_name = values.modified_name
       this.songs[i].genre = values.genre
-    }
-  },
-  async created() {
-    const snapshot = await songsCollection.where('uid', '==', auth.currentUser.uid).get()
-    console.log(snapshot)
-
-    snapshot.forEach((doc) => {
+    },
+    removeSong(i) {
+      this.songs.splice(i, 1)
+    },
+    addSong(doc) {
       const song = {
         ...doc.data(),
         docId: doc.id
       }
 
       this.songs.push(song)
-    })
+    }
+  },
+  async created() {
+    const snapshot = await songsCollection.where('uid', '==', auth.currentUser.uid).get()
+
+    snapshot.forEach(this.addSong)
   }
   // beforeRouteLeave(to, from, next) {
   //   this.$refs.upload.cancelUploads()
@@ -51,7 +54,7 @@ export default {
   <section class="container mx-auto mt-6">
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <div class="col-span-1">
-        <AppUpload ref="upload"></AppUpload>
+        <AppUpload ref="upload" :addSong="addSong"></AppUpload>
       </div>
       <div class="col-span-2">
         <div class="bg-white rounded border border-gray-200 relative flex flex-col">
@@ -67,6 +70,7 @@ export default {
               :song="song"
               :updateSong="updateSong"
               :index="i"
+              :removeSong="removeSong"
             />
           </div>
         </div>

@@ -88,6 +88,15 @@ function usersEmailPasswordExists(email, password) {
 const LATENCY = 300
 const STD = 70
 
+function snapshot(id, data) {
+  return {
+    id,
+    data() {
+      return JSON.parse(JSON.stringify(data))
+    }
+  }
+}
+
 const fake = {
   auth() {
     var currentUser =
@@ -156,6 +165,11 @@ const fake = {
         doc(docId) {
           async function add(data) {
             collectionStore.value[name][docId] = data
+            return {
+              async get() {
+                return snapshot(docId, collectionStore.value[name][docId])
+              }
+            }
           }
 
           async function update(data) {
@@ -166,7 +180,15 @@ const fake = {
 
           return {
             add: withLatency(add, LATENCY, STD),
-            update: withLatency(update, LATENCY, STD)
+            update: withLatency(update, LATENCY, STD),
+            delete: withLatency(
+              () => {
+                collectionStore.value[name][docId] = undefined
+                delete collectionStore.value[name][docId]
+              },
+              LATENCY,
+              STD
+            )
           }
         },
         async add(data) {
@@ -180,12 +202,7 @@ const fake = {
               for (const [docId, data] of Object.entries(collectionStore.value[name])) {
                 let result = eval(`data['${key}']${op}${value}`)
                 if (result) {
-                  records.push({
-                    id: docId,
-                    data() {
-                      return JSON.parse(JSON.stringify(data))
-                    }
-                  })
+                  records.push(snapshot(docId, data))
                 }
               }
               return records
@@ -198,6 +215,15 @@ const fake = {
     return { collection }
   },
   storage() {
+    // var request = indexedDB.open('_storage', 1)
+    // request.onerror = console.error
+    // request.onupgradeneeded = (event) => {
+    //   /** @type {IDBDatabase} */
+    //   const db = event.target.result
+
+    //   const objectStore = db.createObjectStore('files', { autoIncrement: true })
+    // }
+
     function put(file) {
       var progress = new Set()
       var error = new Set()
@@ -273,7 +299,12 @@ const fake = {
     }
 
     function child(path) {
-      return { put }
+      return {
+        put,
+        async delete() {
+          // TODO: delete base on path
+        }
+      }
     }
 
     function ref() {
