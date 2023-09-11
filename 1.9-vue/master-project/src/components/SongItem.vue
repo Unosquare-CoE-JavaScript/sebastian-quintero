@@ -16,7 +16,7 @@ export default {
     <div>
       <RouterLink
         :to="{ name: 'song', params: { id: song.docId } }"
-        class="font-bold block text-gray-600"
+        class="font-bold block text-gray-600 composition-name"
         >{{ song.modified_name }}</RouterLink
       >
       <span class="text-gray-500 text-sm">{{ song.display_name }}</span>
