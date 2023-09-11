@@ -55,3 +55,11 @@ There are three characteristics:
 * Installable: The use can install the application on their devices
 
 https://web.dev/install-criteria/
+
+## Options API vs Composition API
+
+Composition API offers:
+
+* Better TypeScript Support
+* Better Organization
+* Better Reusability
