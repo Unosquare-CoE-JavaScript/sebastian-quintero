@@ -36,3 +36,22 @@ Use `v-if` if the elements will appear/disappear occasionally, or rarely.
 Any time `vm.unmount()` is called Vue is destroyed and the loop over step 9 is broken.
 
 https://vuejs.org/guide/essentials/lifecycle.html
+
+## PWA
+
+Progresive Web Apps. They are an extension for web applications inlcuding some mobile features.
+
+* Open From Home
+* Offline Support
+* Background Sync
+* Push Notification
+* Access to Hardware
+* Geolocation
+
+There are three characteristics:
+
+* Capable: Camera, Notifications, Geolocation
+* Reliable: Perform actions that would require internet without it
+* Installable: The use can install the application on their devices
+
+https://web.dev/install-criteria/

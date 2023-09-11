@@ -7,8 +7,11 @@ import App from './App.vue'
 import { veeValidatePlugin } from './plugins/validation'
 import router from './router'
 import i18n from './includes/i18n'
+import { registerSW } from 'virtual:pwa-register'
 
 import Icon from './directives/icon'
+
+registerSW({ immediate: true })
 
 const app = createApp(App)
 
