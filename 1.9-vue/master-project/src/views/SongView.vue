@@ -86,21 +86,23 @@ export default {
       this.$router.push({ query: { sort: newVal } })
     }
   },
-  async created() {
-    const docSnapshot = await songsCollection.doc(this.$route.params.id).get()
+  async beforeRouteEnter(to, from, next) {
+    const docSnapshot = await songsCollection.doc(to.params.id).get()
 
-    if (!docSnapshot.exists) {
-      this.$router.push({ name: 'home' })
-      return
-    }
+    next((vm) => {
+      if (!docSnapshot.exists) {
+        vm.$router.push({ name: 'home' })
+        return
+      }
 
-    const { sort } = this.$route.query
-    if (sort === '1' || sort === '2') {
-      this.sort = sort
-    }
+      const { sort } = vm.$route.query
+      if (sort === '1' || sort === '2') {
+        vm.sort = sort
+      }
 
-    this.song = docSnapshot.data()
-    this.getComments()
+      vm.song = docSnapshot.data()
+      vm.getComments()
+    })
   }
 }
 </script>
