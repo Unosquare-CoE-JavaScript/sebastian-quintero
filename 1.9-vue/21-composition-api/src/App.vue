@@ -2,6 +2,9 @@
 // eslint-disable-next-line no-unused-vars
 import { ref, reactive, toRefs, watchEffect, watch, computed, onBeforeMount, onMounted } from 'vue'
 import Alert from './components/Alert.vue'
+import { useNumber } from './hooks/number'
+import { useCounterStore } from './stores/counter'
+import AppCounter from './components/AppCounter.vue'
 
 export default {
   name: 'App',
@@ -22,14 +25,17 @@ export default {
 
     // reactive reference
     // ref for primitive values
-    let num = ref(0)
-    function increment() {
-      // access by value
-      num.value++
-    }
-    const double = computed(() => {
-      return 2 * num.value
-    })
+    // let num = ref(0)
+    // function increment() {
+    //   // access by value
+    //   num.value++
+    // }
+    // // Composition Value
+    // const double = computed(() => {
+    //   return 2 * num.value
+    // })
+    const { num, increment, double } = useNumber()
+
     // reactive for objects
     const user = reactive({
       // direct access
@@ -48,6 +54,9 @@ export default {
     // watch([phrase], ([newVal, oldVal]) => {
     //   reversedPhrase.value = phrase.value.split('').reverse().join('')
     // })
+
+    const store = useCounterStore()
+
     return {
       btn,
       num,
@@ -56,15 +65,24 @@ export default {
       // ...toRefs(user),
       phrase,
       reversedPhrase,
-      double
+      double,
+      store
     }
   },
-  components: { Alert }
+  components: { Alert, AppCounter }
 }
 </script>
 
 <template>
   <h1>App</h1>
+
+  <AppCounter initial-value="10" />
+
+  <div>
+    <p>{{ store.count }}</p>
+    <p>{{ store.doubleCount }}</p>
+    <button @click.prevent="store.increment">Increment</button>
+  </div>
   <div>
     <p>2 * {{ num }} = {{ double }}</p>
     <button type="button" @click.prevent="increment">Increment</button>
