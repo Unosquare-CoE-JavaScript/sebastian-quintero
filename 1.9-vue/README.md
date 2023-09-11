@@ -63,3 +63,58 @@ Composition API offers:
 * Better TypeScript Support
 * Better Organization
 * Better Reusability
+
+## Design Patterns
+
+### Controlled Components
+
+* A components that outputs an input for a form
+* Doesn't have it's own state
+* Relies on the parent component for data
+* Emits an event when the user attempts to change the input
+
+https://vuejs.org/guide/components/v-model.html
+
+`v-model` is expanded as follows:
+
+```vue
+<CustomInput
+  :modelValue="searchText"
+  @update:modelValue="(newValue) => (searchText = newValue)"
+/>
+```
+
+The component that receives `v-model` should be define as follows:
+
+```vue
+<!-- CustomInput.vue -->
+<script setup>
+defineProps(["modelValue"]);
+defineEmits(["update:modelValue"]);
+</script>
+
+<template>
+  <input
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+  />
+</template>
+```
+
+### Separation of Concerns
+
+Separate different types of logic to achieve reusable code
+
+UI Logic: Refers to the code inside the template block
+
+Business Logic: Refers to code that handles the data
+
+### Teleport
+
+Vue provides a teleport component. This component allows to keep components hierarchy while rendering the contents into another child of the document.
+
+```vue
+<Teleport to="body">
+  <h1>Hello world</h1>
+</Teleport>
+```
