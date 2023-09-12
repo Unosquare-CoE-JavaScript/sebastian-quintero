@@ -1,3 +1,91 @@
+<h1>Form</h1>
+<div>
+  <form (ngSubmit)="submit()" #form="ngForm">
+    <div>
+      <label>
+        <span>Name</span>
+        <input type="text" required name="name" [(ngModel)]="register.name" />
+      </label>
+      <p *ngIf="form.controls['name'].invalid">Required</p>
+    </div>
+    <div>
+      <label>
+        <span>Email</span>
+        <input
+          type="email"
+          required
+          name="email"
+          [(ngModel)]="register.email"
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        <span>Password</span>
+        <input
+          type="password"
+          required
+          name="password"
+          [(ngModel)]="register.password"
+        />
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+</div>
+
+<hr />
+
+<h1>Dynamic Style</h1>
+<div>
+  <section>
+    <header>
+      <h2>[class] & [style]</h2>
+    </header>
+    <input
+      type="text"
+      required
+      #nameInput="ngModel"
+      [(ngModel)]="person.name"
+    />
+    <p
+      class="error"
+      [class.active]="nameInput.invalid"
+      [style.font-style]="nameInput.invalid ? 'italic' : 'normal'"
+    >
+      The field is required
+    </p>
+  </section>
+
+  <section>
+    <header>
+      <h2>[ngClass] & [ngStyle]</h2>
+    </header>
+    <input
+      type="text"
+      required
+      class="input"
+      #nameInput="ngModel"
+      [(ngModel)]="person.name"
+      [ngClass]="{
+        valid: nameInput.valid,
+        invalid: nameInput.invalid
+      }"
+    />
+    <p
+      class="error"
+      [class.active]="nameInput.invalid"
+      [style.font-style]="nameInput.invalid ? 'italic' : 'normal'"
+    >
+      The field is required
+    </p>
+  </section>
+</div>
+
+<hr />
+
 <h1>Control Flow</h1>
 <div>
   <section>

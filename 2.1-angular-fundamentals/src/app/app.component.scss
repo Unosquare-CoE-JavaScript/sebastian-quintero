@@ -5,3 +5,23 @@
   background-color: antiquewhite;
   font-size: 1.25rem;
 }
+
+.input {
+  &.valid {
+    border-color: green;
+  }
+  &.invalid {
+    border-color: red;
+  }
+}
+
+.error {
+  color: red;
+  opacity: 0;
+
+  transition: opacity 300ms ease-in-out;
+
+  &.active {
+    opacity: 1;
+  }
+}

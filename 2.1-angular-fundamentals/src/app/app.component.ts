@@ -6,6 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  register = {
+    name: '',
+    email: '',
+    password: '',
+  };
+
   nameList = ['John', 'Bob', 'Any'];
 
   name = 'Sebastian';
@@ -52,4 +58,6 @@ export class AppComponent {
   deleteName(index: number) {
     this.nameList.splice(index, 1);
   }
+
+  submit() {}
 }
