@@ -1,23 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../model/product.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StoreService {
-  private cart: Product[] = [];
+  private shoppingCart: Product[] = [];
 
-  constructor() {}
+  private cart = new BehaviorSubject<Product[]>([]);
+
+  get cart$() {
+    return this.cart.asObservable();
+  }
 
   addProduct(product: Product) {
-    this.cart.push(product);
+    this.shoppingCart.push(product);
+    this.cart.next(this.shoppingCart);
   }
 
   getAmount() {
-    return this.cart.length;
+    return this.shoppingCart.length;
   }
 
   getTotal() {
-    return this.cart.reduce((sum, current) => sum + current.price, 0);
+    return this.shoppingCart.reduce((sum, current) => sum + current.price, 0);
   }
 }

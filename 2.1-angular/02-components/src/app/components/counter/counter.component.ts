@@ -16,9 +16,9 @@ import {
 export class CounterComponent
   implements OnChanges, OnInit, AfterViewInit, OnDestroy
 {
-  @Input() initialCount: number = 0;
+  @Input() initialCount = 0;
 
-  @Input() stopAt: number = Infinity;
+  @Input() stopAt = Infinity;
 
   count: number = this.initialCount;
 
