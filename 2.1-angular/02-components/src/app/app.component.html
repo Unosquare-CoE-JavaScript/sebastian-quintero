@@ -1,1 +1,12 @@
-<app-image></app-image>
+<input type="text" [(ngModel)]="value" />
+<app-title [title]="value"></app-title>
+
+<section>
+  <div>
+    <label>
+      <span>src</span>
+      <input type="text" [(ngModel)]="src" />
+    </label>
+  </div>
+  <app-image (loaded)="onLoaded($event)" [src]="src"></app-image>
+</section>

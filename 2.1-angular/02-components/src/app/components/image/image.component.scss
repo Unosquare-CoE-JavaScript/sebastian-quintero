@@ -1,0 +1,11 @@
+.image {
+  box-sizing: border-box;
+
+  &.image--success {
+    border: 1px solid lime;
+  }
+
+  &.image--failure {
+    border: 1px solid red;
+  }
+}
