@@ -10,3 +10,10 @@
   </div>
   <app-image (loaded)="onLoaded($event)" [src]="src"></app-image>
 </section>
+
+<section>
+  <app-product
+    [product]="product"
+    *ngFor="let product of products"
+  ></app-product>
+</section>
