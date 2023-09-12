@@ -10,6 +10,9 @@ import { TitleComponent } from './components/title/title.component';
 import { ProductComponent } from './components/product/product.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { ReversePipe } from './pipes/reverse.pipe';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { ProductListComponent } from './components/product-list/product-list.com
     ProductComponent,
     CounterComponent,
     ProductListComponent,
+    ReversePipe,
+    TimeAgoPipe,
+    HighlightDirective,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
