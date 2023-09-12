@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from 'src/app/model/product.model';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-product-list',
@@ -33,4 +34,10 @@ export class ProductListComponent {
       name: 'Product 4',
     },
   ];
+
+  constructor(private storeService: StoreService) {}
+
+  onAddProduct(product: Product) {
+    this.storeService.addProduct(product);
+  }
 }

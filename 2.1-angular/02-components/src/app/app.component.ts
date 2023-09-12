@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from './model/product.model';
+import { StoreService } from './services/store.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,16 @@ export class AppComponent {
   src = '';
 
   isCounterEnabled = true;
+
+  constructor(private storeService: StoreService) {}
+
+  get amount() {
+    return this.storeService.getAmount();
+  }
+
+  get total() {
+    return this.storeService.getTotal();
+  }
 
   onLoaded(src: string) {
     console.log(`${src} loaded`);
