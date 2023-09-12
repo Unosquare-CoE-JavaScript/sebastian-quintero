@@ -1,0 +1,13 @@
+.products {
+}
+
+@media screen and (min-width: 720px) {
+  .products {
+    display: grid;
+    grid-template: auto / repeat(4, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media screen and (min-width: 1024) {
+}
