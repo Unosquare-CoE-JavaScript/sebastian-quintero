@@ -1,3 +1,41 @@
+<h1>Control Flow</h1>
+<div>
+  <section>
+    <header>
+      <h2>*ngIf</h2>
+    </header>
+    <p *ngIf="person.name === 'Sebastian'; else elseBlock">Hello World</p>
+    <ng-template #elseBlock>Test</ng-template>
+  </section>
+
+  <section>
+    <header>
+      <h2>*ngFor</h2>
+    </header>
+    <input type="text" required [(ngModel)]="newName" />
+    <button (click)="addName()">Add</button>
+    <ul>
+      <li *ngIf="nameList.length === 0">Empty</li>
+      <li *ngFor="let name of nameList; index as i">
+        <span>{{ i }}. {{ name }}</span>
+        <button (click)="deleteName(i)">Delete</button>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <header>
+      <h2>[ngSwitch]</h2>
+    </header>
+    <div [ngSwitch]="person.name">
+      <p *ngSwitchCase="'Sebastian'">Sebastian</p>
+      <p *ngSwitchCase="'John'">John</p>
+      <p *ngSwitchCase="'Bob'">Bob</p>
+      <p *ngSwitchDefault>Default case</p>
+    </div>
+  </section>
+</div>
+
 <h1>NgModel</h1>
 <div>
   <p>{{ name }}</p>

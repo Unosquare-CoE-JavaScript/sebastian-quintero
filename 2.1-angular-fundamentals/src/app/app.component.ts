@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  nameList = ['John', 'Bob', 'Any'];
+
   name = 'Sebastian';
   age = 28;
   src = 'https://www.w3schools.com/howto/img_avatar.png';
@@ -18,6 +20,8 @@ export class AppComponent {
   };
 
   disabled = false;
+
+  newName = '';
 
   toggleButton() {
     this.disabled = !this.disabled;
@@ -38,5 +42,14 @@ export class AppComponent {
   changeName(event: Event) {
     const element = event.target as HTMLInputElement;
     this.person.name = element.value;
+  }
+
+  addName() {
+    this.nameList.push(this.newName);
+    this.newName = '';
+  }
+
+  deleteName(index: number) {
+    this.nameList.splice(index, 1);
   }
 }
