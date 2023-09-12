@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/model/product.model';
+import { ProductService } from 'src/app/services/product.service';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -7,35 +8,17 @@ import { StoreService } from 'src/app/services/store.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
-export class ProductListComponent {
-  products: Product[] = [
-    {
-      id: '1',
-      image: 'https://placehold.co/600x400/png',
-      price: 33,
-      name: 'Product 1',
-    },
-    {
-      id: '2',
-      image: 'https://placehold.co/600x400/png',
-      price: 123,
-      name: 'Product 2',
-    },
-    {
-      id: '3',
-      image: 'https://placehold.co/600x400/png',
-      price: 325,
-      name: 'Product 3',
-    },
-    {
-      id: '4',
-      image: 'https://placehold.co/600x400/png',
-      price: 45,
-      name: 'Product 4',
-    },
-  ];
+export class ProductListComponent implements OnInit {
+  products: Product[] = [];
 
-  constructor(private storeService: StoreService) {}
+  constructor(
+    private storeService: StoreService,
+    private productService: ProductService
+  ) {}
+
+  ngOnInit(): void {
+    this.productService.findAll().subscribe((data) => (this.products = data));
+  }
 
   onAddProduct(product: Product) {
     this.storeService.addProduct(product);

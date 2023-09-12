@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ImageComponent } from './components/image/image.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { TitleComponent } from './components/title/title.component';
 import { ProductComponent } from './components/product/product.component';
 import { CounterComponent } from './components/counter/counter.component';
@@ -19,7 +20,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
     CounterComponent,
     ProductListComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
