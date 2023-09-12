@@ -7,9 +7,10 @@ import { ImageComponent } from './components/image/image.component';
 import { FormsModule } from '@angular/forms';
 import { TitleComponent } from './components/title/title.component';
 import { ProductComponent } from './components/product/product.component';
+import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
-  declarations: [AppComponent, ImageComponent, TitleComponent, ProductComponent],
+  declarations: [AppComponent, ImageComponent, TitleComponent, ProductComponent, CounterComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

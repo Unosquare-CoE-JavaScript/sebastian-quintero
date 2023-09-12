@@ -1,5 +1,13 @@
-<input type="text" [(ngModel)]="value" />
-<app-title [title]="value"></app-title>
+<section>
+  <app-counter *ngIf="isCounterEnabled"></app-counter>
+  <button (click)="startCounter()">Start</button>
+  <button (click)="stopCounter()">Stop</button>
+</section>
+
+<section>
+  <input type="text" [(ngModel)]="value" />
+  <app-title [title]="value"></app-title>
+</section>
 
 <section>
   <div>

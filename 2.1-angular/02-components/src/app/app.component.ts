@@ -38,7 +38,17 @@ export class AppComponent {
     },
   ];
 
+  isCounterEnabled = true;
+
   onLoaded(src: string) {
     console.log(`${src} loaded`);
+  }
+
+  startCounter() {
+    this.isCounterEnabled = true;
+  }
+
+  stopCounter() {
+    this.isCounterEnabled = false;
   }
 }
