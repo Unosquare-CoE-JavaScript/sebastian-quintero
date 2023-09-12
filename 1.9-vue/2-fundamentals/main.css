@@ -1,0 +1,56 @@
+label {
+  display: block;
+}
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  background-color: limegreen;
+  text-align: center;
+  color: white;
+  line-height: 150px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.text-black {
+  color: black;
+}
+
+.text-orange {
+  color: orange;
+}
+
+#card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.move {
+  padding: 0.5rem 0.75rem;
+  background-color: cornflowerblue;
+  border: none;
+  color: white;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 12rem;
+  background-color: white;
+  border: 1px solid grey;
+  padding: 0.5rem;
+}
+
+[v-cloak] {
+  display: none;
+}
