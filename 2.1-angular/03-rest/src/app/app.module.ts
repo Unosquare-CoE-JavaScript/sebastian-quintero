@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './components/product/product.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
 import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
@@ -17,7 +16,6 @@ import { SwiperModule } from 'swiper/angular';
     ImageComponent,
     ProductComponent,
     ProductListComponent,
-    NavigationComponent,
   ],
   imports: [
     BrowserModule,
