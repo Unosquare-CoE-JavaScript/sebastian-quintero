@@ -1,4 +1,5 @@
 <button (click)="createNewProduct()">Create</button>
+
 <div class="products">
   <app-product
     [product]="product"
@@ -7,6 +8,7 @@
     (added)="onAddProduct($event)"
   ></app-product>
 </div>
+<button (click)="loadMore()">Load More</button>
 <div class="details" [class.details--shown]="isDetailsShown">
   <button class="details__button" (click)="toggleDetails()">Close</button>
   <div class="details__content">

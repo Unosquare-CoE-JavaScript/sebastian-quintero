@@ -5,6 +5,7 @@ import {
   Product,
   UpdatableProduct,
 } from '../model/product.model';
+import { retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,15 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   findAll() {
-    return this.http.get<Product[]>(`${this.baseUrl}?offset=0&limit=50`);
+    return this.http
+      .get<Product[]>(`${this.baseUrl}?offset=0&limit=50`)
+      .pipe(retry(3));
+  }
+
+  findBy(offset: number, limit: number) {
+    return this.http.get<Product[]>(this.baseUrl, {
+      params: { offset, limit },
+    });
   }
 
   findOne(id: string) {

@@ -13,6 +13,9 @@ import { StoreService } from 'src/app/services/store.service';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
+  offset = 0;
+  limit = 10;
+
   productDetails: Product = {
     id: '',
     images: [],
@@ -84,6 +87,13 @@ export class ProductListComponent implements OnInit {
       this.products = this.products.filter(
         (product) => product.id !== this.productDetails.id
       );
+    });
+  }
+
+  loadMore() {
+    this.productService.findBy(this.offset, this.limit).subscribe((data) => {
+      this.products = this.products.concat(data);
+      this.offset += this.limit;
     });
   }
 }
