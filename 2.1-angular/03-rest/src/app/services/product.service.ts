@@ -11,6 +11,7 @@ import {
 } from '../model/product.model';
 import { catchError, map, retry, switchMap, throwError, zip } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { checkTime } from '../interceptors/time.interceptor';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,9 @@ export class ProductService {
 
   findAll() {
     return this.http
-      .get<Product[]>(`${this.endpointUrl}?offset=0&limit=50`)
+      .get<Product[]>(`${this.endpointUrl}?offset=0&limit=50`, {
+        context: checkTime(),
+      })
       .pipe(
         retry(3),
         map((products) =>
