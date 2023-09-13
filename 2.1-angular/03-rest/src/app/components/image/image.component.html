@@ -1,0 +1,23 @@
+<img
+  (error)="onError()"
+  (load)="onLoad()"
+  [src]="src"
+  alt=""
+  *ngIf="src; else default"
+  class="image"
+  [ngClass]="{
+    'image--failure': status === 'failure',
+    'image--success': status === 'success'
+  }"
+/>
+<ng-template #default>
+  <img
+    src="https://placehold.co/600x400/EEE/31343C"
+    alt=""
+    class="image"
+    [ngClass]="{
+      'image--failure': status === 'failure',
+      'image--success': status === 'success'
+    }"
+  />
+</ng-template>

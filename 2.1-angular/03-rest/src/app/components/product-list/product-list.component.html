@@ -1,0 +1,22 @@
+<button (click)="createNewProduct()">Create</button>
+<div class="products">
+  <app-product
+    [product]="product"
+    *ngFor="let product of products"
+    (showed)="onShowDetail($event)"
+    (added)="onAddProduct($event)"
+  ></app-product>
+</div>
+<div class="details" [class.details--shown]="isDetailsShown">
+  <button class="details__button" (click)="toggleDetails()">Close</button>
+  <div class="details__content">
+    <h2>{{ productDetails.title }}</h2>
+    <swiper [slidesPerView]="1">
+      <ng-template swiperSlide *ngFor="let img of productDetails.images">
+        <img [src]="img" alt="" />
+      </ng-template>
+    </swiper>
+  </div>
+  <button (click)="updateProduct()">Edit</button>
+  <button (click)="deleteProduct()">Delete</button>
+</div>
