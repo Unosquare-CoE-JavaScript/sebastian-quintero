@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { StoreService } from './services/store.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,6 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  token = '';
-
   value = '02-components';
 
   src = '';
@@ -55,12 +54,13 @@ export class AppComponent {
   }
 
   login() {
-    this.authService.login('pac@rdar.se', 'pass123').subscribe((data) => {
-      this.token = data.access_token;
-    });
+    this.authService
+      .login('pac@rdar.se', 'pass123')
+      .pipe(tap(() => this.getProfile()))
+      .subscribe(console.log);
   }
 
   getProfile() {
-    this.authService.profile(this.token).subscribe(console.log);
+    this.authService.profile().subscribe(console.log);
   }
 }
