@@ -9,7 +9,7 @@ import {
   Product,
   UpdatableProduct,
 } from '../model/product.model';
-import { catchError, map, retry, throwError } from 'rxjs';
+import { catchError, map, retry, switchMap, throwError, zip } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -58,5 +58,20 @@ export class ProductService {
 
   deleteOne(id: string) {
     return this.http.delete<boolean>(`${this.baseUrl}/${id}`);
+  }
+
+  readAndUpdate(id: string) {
+    this.findOne(id)
+      .pipe(
+        switchMap((product) =>
+          this.updateOne(product.id, { title: 'New Title' })
+        )
+      )
+      .subscribe(console.log);
+    zip(this.findOne(id), this.updateOne(id, { price: 100 })).subscribe(
+      ([found, updated]) => {
+        console.log(found, updated);
+      }
+    );
   }
 }
