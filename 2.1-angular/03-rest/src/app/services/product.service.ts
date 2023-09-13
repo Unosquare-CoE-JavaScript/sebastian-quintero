@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpStatusCode,
+} from '@angular/common/http';
 import {
   CreatableProduct,
   Product,
   UpdatableProduct,
 } from '../model/product.model';
-import { retry } from 'rxjs';
+import { catchError, map, retry, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +20,12 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   findAll() {
-    return this.http
-      .get<Product[]>(`${this.baseUrl}?offset=0&limit=50`)
-      .pipe(retry(3));
+    return this.http.get<Product[]>(`${this.baseUrl}?offset=0&limit=50`).pipe(
+      retry(3),
+      map((products) =>
+        products.map((product) => ({ ...product, taxes: 0.19 * product.price }))
+      )
+    );
   }
 
   findBy(offset: number, limit: number) {
@@ -28,7 +35,17 @@ export class ProductService {
   }
 
   findOne(id: string) {
-    return this.http.get<Product>(`${this.baseUrl}/${id}`);
+    return this.http.get<Product>(`${this.baseUrl}/${id}`).pipe(
+      catchError((err: HttpErrorResponse, caught) => {
+        if (err.status === HttpStatusCode.InternalServerError) {
+          return throwError(() => new Error('Server Error'));
+        }
+        if (err.status === HttpStatusCode.NotFound) {
+          return throwError(() => new Error('Not Found'));
+        }
+        return throwError(() => new Error('Something goes wrong'));
+      })
+    );
   }
 
   createOne(data: CreatableProduct) {

@@ -29,6 +29,8 @@ export class ProductListComponent implements OnInit {
 
   isDetailsShown = false;
 
+  detailStatus: 'loading' | 'success' | 'error' | 'init' = 'init';
+
   constructor(
     private storeService: StoreService,
     private productService: ProductService
@@ -39,9 +41,17 @@ export class ProductListComponent implements OnInit {
   }
 
   onShowDetail(id: string) {
-    this.productService.findOne(id).subscribe((data) => {
-      this.isDetailsShown = true;
-      this.productDetails = data;
+    this.detailStatus = 'loading';
+    this.productService.findOne(id).subscribe({
+      next: (data) => {
+        this.isDetailsShown = true;
+        this.productDetails = data;
+        this.detailStatus = 'success';
+      },
+      error: (err) => {
+        console.error(err);
+        this.detailStatus = 'error';
+      },
     });
   }
 
