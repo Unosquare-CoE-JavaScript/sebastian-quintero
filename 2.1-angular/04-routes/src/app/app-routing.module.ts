@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { IdlePreloadService } from './services/idle-preload.service';
 
 const routes: Routes = [
   {
@@ -19,7 +20,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: IdlePreloadService,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

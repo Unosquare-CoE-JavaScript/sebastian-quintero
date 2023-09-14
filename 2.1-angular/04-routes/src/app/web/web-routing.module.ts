@@ -24,8 +24,11 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'category/:id',
-        component: CategoryComponent,
+        path: 'category',
+        loadChildren: () =>
+          import('./pages/category/category.module').then(
+            (mod) => mod.CategoryModule
+          ),
       },
       {
         path: 'login',
