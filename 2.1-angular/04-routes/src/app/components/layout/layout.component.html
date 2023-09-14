@@ -1,0 +1,28 @@
+<h1>Web</h1>
+
+<nav class="nav">
+  <ul class="nav__list">
+    <li class="nav__item">
+      <a
+        class="nav__link"
+        routerLinkActive="nav__link--active"
+        routerLink="home"
+      >
+        Home
+      </a>
+    </li>
+    <li class="nav__item" *ngFor="let category of categories">
+      <a
+        class="nav__link"
+        routerLinkActive="nav__link--active"
+        [routerLink]="['category', category.id]"
+      >
+        {{ category.name }}
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

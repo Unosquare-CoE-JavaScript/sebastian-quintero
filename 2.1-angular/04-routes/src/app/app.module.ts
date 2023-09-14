@@ -12,6 +12,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProductComponent } from './components/product/product.component';
+import { LayoutComponent } from './components/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductComponent } from './components/product/product.component';
     RegisterComponent,
     RecoveryComponent,
     ProfileComponent,
-    ProductComponent
+    ProductComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
