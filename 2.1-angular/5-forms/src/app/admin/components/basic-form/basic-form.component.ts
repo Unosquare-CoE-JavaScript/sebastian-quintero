@@ -7,5 +7,19 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./basic-form.component.scss'],
 })
 export class BasicFormComponent {
-  nameField = new FormControl();
+  // Basic Inputs
+  nameField = new FormControl('');
+  emailField = new FormControl('');
+  phoneField = new FormControl('');
+  colorField = new FormControl('#000000');
+  dateField = new FormControl('');
+
+  // Selects
+  categoryField = new FormControl('');
+  tagField = new FormControl('');
+
+  //
+  agreeField = new FormControl(false);
+  genderField = new FormControl('');
+  zoneField = new FormControl('');
 }
