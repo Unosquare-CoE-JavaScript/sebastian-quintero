@@ -1,0 +1,25 @@
+div {
+  padding: 1rem;
+
+  label {
+    display: flex;
+    gap: 1rem;
+
+    input.is-valid {
+      border-color: greenyellow;
+    }
+  }
+
+  .errors {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+
+    &.is-shown {
+      opacity: 1;
+    }
+
+    p {
+      color: red;
+    }
+  }
+}

@@ -1,103 +1,137 @@
-<div>
-  <label>
-    <span>Name ({{ nameField.value }})</span>
-    <input type="text" [formControl]="nameField" />
-  </label>
-</div>
-<div>
-  <label>
-    <span>Email ({{ emailField.value }})</span>
-    <input type="email" [formControl]="emailField" />
-  </label>
-</div>
-<div>
-  <label>
-    <span>Phone Number ({{ phoneField.value }})</span>
-    <input type="tel" [formControl]="phoneField" />
-  </label>
-</div>
-<div>
-  <label>
-    <span>Color ({{ colorField.value }})</span>
-    <input type="color" [formControl]="colorField" />
-  </label>
-</div>
-<div>
-  <label>
-    <span>Date ({{ dateField.value }})</span>
-    <input type="date" [formControl]="dateField" />
-  </label>
-</div>
-<div>
-  <label>
-    <span>Category ({{ categoryField.value }})</span>
-    <select [formControl]="categoryField">
-      <option value="category-1">Category 1</option>
-      <option value="category-2">Category 2</option>
-      <option value="category-3">Category 3</option>
-      <option value="category-4">Category 4</option>
-    </select>
-  </label>
-</div>
-<div>
-  <label>
-    <span>Tags ({{ tagField.value }})</span>
-    <select [formControl]="tagField" multiple>
-      <option value="tag-1">Tag 1</option>
-      <option value="tag-2">Tag 2</option>
-      <option value="tag-3">Tag 3</option>
-      <option value="tag-4">Tag 4</option>
-    </select>
-  </label>
-</div>
-<div>
-  <label>
-    <span>Agree ({{ agreeField.value }})</span>
-    <input type="checkbox" [formControl]="agreeField" />
-  </label>
-</div>
-<div>
-  <span>Gender ({{ genderField.value }})</span>
-  <label>
-    <span>Male</span>
-    <input
-      name="gender"
-      type="radio"
-      [formControl]="genderField"
-      value="male"
-    />
-  </label>
-  <label>
-    <span>Female</span>
-    <input
-      name="gender"
-      type="radio"
-      [formControl]="genderField"
-      value="female"
-    />
-  </label>
-  <label>
-    <span>Other</span>
-    <input
-      name="gender"
-      type="radio"
-      [formControl]="genderField"
-      value="other"
-    />
-  </label>
-</div>
-<div>
-  <span>Zone ({{ zoneField.value }})</span>
-  <label>
-    <span>Zone 1</span>
-    <input name="zone" type="radio" [formControl]="zoneField" value="zone-1" />
-  </label>
-  <label>
-    <span>Zone 2</span>
-    <input name="zone" type="radio" [formControl]="zoneField" value="zone-2" />
-  </label>
-  <label>
-    <span>Zone 3</span>
-    <input name="zone" type="radio" [formControl]="zoneField" value="zone-3" />
-  </label>
-</div>
+<mat-card>
+  <div>
+    <label>
+      <span>Name ({{ nameField.value }}) [{{ nameField.valid }}]</span>
+      <input
+        type="text"
+        [class.is-valid]="nameField.touched && nameField.valid"
+        [formControl]="nameField"
+      />
+    </label>
+    <div
+      class="errors"
+      [class.is-shown]="nameField.touched && nameField.invalid"
+    >
+      <p *ngIf="nameField.touched && nameField.hasError('required')">
+        Name field is required
+      </p>
+      <p *ngIf="nameField.touched && nameField.hasError('maxlength')">
+        Name should be less than 10 letters
+      </p>
+    </div>
+  </div>
+  <div>
+    <label>
+      <span>Email ({{ emailField.value }}) [{{ emailField.valid }}]</span>
+      <input type="email" [formControl]="emailField" />
+    </label>
+  </div>
+  <div>
+    <label>
+      <span
+        >Phone Number ({{ phoneField.value }}) [{{ phoneField.value }}]</span
+      >
+      <input type="tel" [formControl]="phoneField" />
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Color ({{ colorField.value }})</span>
+      <input type="color" [formControl]="colorField" />
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Date ({{ dateField.value }})</span>
+      <input type="date" [formControl]="dateField" />
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Category ({{ categoryField.value }})</span>
+      <select [formControl]="categoryField">
+        <option value="category-1">Category 1</option>
+        <option value="category-2">Category 2</option>
+        <option value="category-3">Category 3</option>
+        <option value="category-4">Category 4</option>
+      </select>
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Tags ({{ tagField.value }})</span>
+      <select [formControl]="tagField" multiple>
+        <option value="tag-1">Tag 1</option>
+        <option value="tag-2">Tag 2</option>
+        <option value="tag-3">Tag 3</option>
+        <option value="tag-4">Tag 4</option>
+      </select>
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Agree ({{ agreeField.value }})</span>
+      <input type="checkbox" [formControl]="agreeField" />
+    </label>
+  </div>
+  <div>
+    <span>Gender ({{ genderField.value }})</span>
+    <label>
+      <span>Male</span>
+      <input
+        name="gender"
+        type="radio"
+        [formControl]="genderField"
+        value="male"
+      />
+    </label>
+    <label>
+      <span>Female</span>
+      <input
+        name="gender"
+        type="radio"
+        [formControl]="genderField"
+        value="female"
+      />
+    </label>
+    <label>
+      <span>Other</span>
+      <input
+        name="gender"
+        type="radio"
+        [formControl]="genderField"
+        value="other"
+      />
+    </label>
+  </div>
+  <div>
+    <span>Zone ({{ zoneField.value }})</span>
+    <label>
+      <span>Zone 1</span>
+      <input
+        name="zone"
+        type="radio"
+        [formControl]="zoneField"
+        value="zone-1"
+      />
+    </label>
+    <label>
+      <span>Zone 2</span>
+      <input
+        name="zone"
+        type="radio"
+        [formControl]="zoneField"
+        value="zone-2"
+      />
+    </label>
+    <label>
+      <span>Zone 3</span>
+      <input
+        name="zone"
+        type="radio"
+        [formControl]="zoneField"
+        value="zone-3"
+      />
+    </label>
+  </div>
+</mat-card>
