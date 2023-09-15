@@ -1,1 +1,38 @@
-<p>category-form works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-header>Create a Category</mat-card-header>
+    <mat-card-content>
+      <div class="vertical">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input
+            type="text"
+            placeholder="Name"
+            matInput
+            formControlName="name"
+          />
+          <mat-error *ngIf="nameField.touched && nameField.invalid">
+            <span *ngIf="nameField.hasError('required')">Name is required</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Image</mat-label>
+          <input
+            type="text"
+            placeholder="Image"
+            matInput
+            formControlName="image"
+          />
+          <mat-error *ngIf="imageField.touched && imageField.invalid">
+            <span *ngIf="nameField.hasError('required')"
+              >Image is required</span
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-raised-button>Create</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
