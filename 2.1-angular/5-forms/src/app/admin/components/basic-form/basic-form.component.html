@@ -135,3 +135,132 @@
     </label>
   </div>
 </mat-card>
+
+<form [formGroup]="form" (ngSubmit)="submit($event)">
+  <div>
+    <label>
+      <span
+        >Name ({{ form.get("name").value }}) [{{
+          form.get("name").valid
+        }}]</span
+      >
+      <input
+        type="text"
+        [class.is-valid]="nameField.touched && nameField.valid"
+        formControlName="name"
+      />
+    </label>
+    <div
+      class="errors"
+      [class.is-shown]="nameField.touched && nameField.invalid"
+    >
+      <p *ngIf="nameField.touched && nameField.hasError('required')">
+        Name field is required
+      </p>
+      <p *ngIf="nameField.touched && nameField.hasError('maxlength')">
+        Name should be less than 10 letters
+      </p>
+    </div>
+  </div>
+  <div>
+    <label>
+      <span
+        >Email ({{ form.get("email").value }}) [{{ emailField.valid }}]</span
+      >
+      <input type="email" formControlName="email" />
+    </label>
+  </div>
+  <div>
+    <label>
+      <span
+        >Phone Number ({{ form.get("phone").value }}) [{{
+          form.get("phone").value
+        }}]</span
+      >
+      <input type="tel" formControlName="phone" />
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Color ({{ form.get("color").value }})</span>
+      <input type="color" formControlName="color" />
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Date ({{ form.get("date").value }})</span>
+      <input type="date" formControlName="date" />
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Category ({{ form.get("category").value }})</span>
+      <select formControlName="category">
+        <option value="category-1">Category 1</option>
+        <option value="category-2">Category 2</option>
+        <option value="category-3">Category 3</option>
+        <option value="category-4">Category 4</option>
+      </select>
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Tags ({{ form.get("tag").value }})</span>
+      <select formControlName="tag" multiple>
+        <option value="tag-1">Tag 1</option>
+        <option value="tag-2">Tag 2</option>
+        <option value="tag-3">Tag 3</option>
+        <option value="tag-4">Tag 4</option>
+      </select>
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Agree ({{ form.get("agree").value }})</span>
+      <input type="checkbox" formControlName="agree" />
+    </label>
+  </div>
+  <div>
+    <span>Gender ({{ form.get("gender").value }})</span>
+    <label>
+      <span>Male</span>
+      <input name="gender" type="radio" formControlName="gender" value="male" />
+    </label>
+    <label>
+      <span>Female</span>
+      <input
+        name="gender"
+        type="radio"
+        formControlName="gender"
+        value="female"
+      />
+    </label>
+    <label>
+      <span>Other</span>
+      <input
+        name="gender"
+        type="radio"
+        formControlName="gender"
+        value="other"
+      />
+    </label>
+  </div>
+  <div>
+    <span>Zone ({{ form.get("zone").value }})</span>
+    <label>
+      <span>Zone 1</span>
+      <input name="zone" type="radio" formControlName="zone" value="zone-1" />
+    </label>
+    <label>
+      <span>Zone 2</span>
+      <input name="zone" type="radio" formControlName="zone" value="zone-2" />
+    </label>
+    <label>
+      <span>Zone 3</span>
+      <input name="zone" type="radio" formControlName="zone" value="zone-3" />
+    </label>
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
