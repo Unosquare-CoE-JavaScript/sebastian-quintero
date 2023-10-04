@@ -1,0 +1,26 @@
+<section>
+  <app-counter *ngIf="isCounterEnabled"></app-counter>
+  <button (click)="startCounter()">Start</button>
+  <button (click)="stopCounter()">Stop</button>
+</section>
+
+<section>
+  <input type="text" [(ngModel)]="value" />
+  <app-title [title]="value"></app-title>
+</section>
+
+<section>
+  <div>
+    <label>
+      <span>src</span>
+      <input type="text" [(ngModel)]="src" />
+    </label>
+  </div>
+  <app-image (loaded)="onLoaded($event)" [src]="src"></app-image>
+</section>
+
+<section>
+  <div>{{ amount }} products ({{ total }})</div>
+
+  <app-product-list></app-product-list>
+</section>

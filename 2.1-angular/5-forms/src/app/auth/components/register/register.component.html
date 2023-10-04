@@ -1,0 +1,72 @@
+<form [formGroup]="form" (ngSubmit)="register($event)">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Registro</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input
+              placeholder="email"
+              formControlName="email"
+              matInput
+              type="email"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+              placeholder="password"
+              formControlName="password"
+              matInput
+              type="password"
+            />
+            <mat-error
+              *ngIf="
+                passwordField.touched &&
+                passwordField.invalid &&
+                passwordField.hasError('password_number')
+              "
+            >
+              Should include a number
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Confirm Password</mat-label>
+            <input
+              placeholder="Confirm Password"
+              formControlName="confirmPassword"
+              matInput
+              type="password"
+            />
+            <mat-error
+              *ngIf="
+                confirmPasswordField.touched &&
+                confirmPasswordField.invalid &&
+                confirmPasswordField.hasError('match')
+              "
+            >
+              Should match the password
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="submit">Registro</button>
+    </mat-card-actions>
+    <mat-card-actions>
+      <a routerLink="/auth/login">Login</a>
+    </mat-card-actions>
+  </mat-card>
+</form>

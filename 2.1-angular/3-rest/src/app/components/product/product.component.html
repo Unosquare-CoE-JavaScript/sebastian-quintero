@@ -1,0 +1,6 @@
+<app-image *ngIf="product.images.length > 0" [src]="product.images[0]" alt="" />
+<h2>{{ product.price | currency : "USD" }}</h2>
+<p>{{ product.title }}</p>
+<p appHighlight>{{ product.description }}</p>
+<button (click)="onShowDetail()">Show Detail</button>
+<button (click)="onAdd()">Add</button>

@@ -1,0 +1,178 @@
+<h1>Form</h1>
+<div>
+  <form (ngSubmit)="submit()" #form="ngForm">
+    <div>
+      <label>
+        <span>Name</span>
+        <input type="text" required name="name" [(ngModel)]="register.name" />
+      </label>
+      <p *ngIf="form.controls['name'].invalid">Required</p>
+    </div>
+    <div>
+      <label>
+        <span>Email</span>
+        <input
+          type="email"
+          required
+          name="email"
+          [(ngModel)]="register.email"
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        <span>Password</span>
+        <input
+          type="password"
+          required
+          name="password"
+          [(ngModel)]="register.password"
+        />
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+</div>
+
+<hr />
+
+<h1>Dynamic Style</h1>
+<div>
+  <section>
+    <header>
+      <h2>[class] & [style]</h2>
+    </header>
+    <input
+      type="text"
+      required
+      #nameInput="ngModel"
+      [(ngModel)]="person.name"
+    />
+    <p
+      class="error"
+      [class.active]="nameInput.invalid"
+      [style.font-style]="nameInput.invalid ? 'italic' : 'normal'"
+    >
+      The field is required
+    </p>
+  </section>
+
+  <section>
+    <header>
+      <h2>[ngClass] & [ngStyle]</h2>
+    </header>
+    <input
+      type="text"
+      required
+      class="input"
+      #nameInput="ngModel"
+      [(ngModel)]="person.name"
+      [ngClass]="{
+        valid: nameInput.valid,
+        invalid: nameInput.invalid
+      }"
+    />
+    <p
+      class="error"
+      [class.active]="nameInput.invalid"
+      [style.font-style]="nameInput.invalid ? 'italic' : 'normal'"
+    >
+      The field is required
+    </p>
+  </section>
+</div>
+
+<hr />
+
+<h1>Control Flow</h1>
+<div>
+  <section>
+    <header>
+      <h2>*ngIf</h2>
+    </header>
+    <p *ngIf="person.name === 'Sebastian'; else elseBlock">Hello World</p>
+    <ng-template #elseBlock>Test</ng-template>
+  </section>
+
+  <section>
+    <header>
+      <h2>*ngFor</h2>
+    </header>
+    <input type="text" required [(ngModel)]="newName" />
+    <button (click)="addName()">Add</button>
+    <ul>
+      <li *ngIf="nameList.length === 0">Empty</li>
+      <li *ngFor="let name of nameList; index as i">
+        <span>{{ i }}. {{ name }}</span>
+        <button (click)="deleteName(i)">Delete</button>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <header>
+      <h2>[ngSwitch]</h2>
+    </header>
+    <div [ngSwitch]="person.name">
+      <p *ngSwitchCase="'Sebastian'">Sebastian</p>
+      <p *ngSwitchCase="'John'">John</p>
+      <p *ngSwitchCase="'Bob'">Bob</p>
+      <p *ngSwitchDefault>Default case</p>
+    </div>
+  </section>
+</div>
+
+<h1>NgModel</h1>
+<div>
+  <p>{{ name }}</p>
+  <input type="text" required #nameInput="ngModel" [(ngModel)]="name" />
+  <p>Valid: {{ nameInput.valid }}</p>
+</div>
+
+<hr />
+
+<h1>Event Binding</h1>
+
+<div>
+  <button [disabled]="disabled">Send</button>
+  <button (click)="toggleButton()">Toggle</button>
+
+  <button (click)="increment()">++</button>
+</div>
+
+<div class="box" (scroll)="onScroll($event)">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni inventore
+    officia totam debitis facere quibusdam assumenda quo accusantium earum
+    nesciunt aspernatur cupiditate, enim fuga rerum ab eaque itaque praesentium
+    nostrum.
+  </p>
+</div>
+
+<div>
+  <p>Name: {{ person.name }}</p>
+  <input type="text" [value]="person.name" (input)="changeName($event)" />
+</div>
+
+<hr />
+
+<h1>Properties</h1>
+<div>
+  <button [disabled]="btnDisabled">Click Me!</button>
+  <input type="text" [value]="name" />
+  <progress max="100" [value]="age"></progress>
+  <img width="100" [src]="src" alt="" />
+</div>
+
+<hr />
+
+<h1>String Interpolation</h1>
+<div>
+  <h2>{{ "Hola mundo".repeat(5) }}</h2>
+  <p>3 + 3 = {{ 3 + 3 }}</p>
+  <h3>Hello, I'm {{ name }}</h3>
+
+  <img src="{{ src }}" alt="" />
+</div>
